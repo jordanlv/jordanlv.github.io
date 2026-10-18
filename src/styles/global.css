@@ -117,9 +117,9 @@ p { margin: 0; }
 .avatar {
   width: 96px;
   height: 96px;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
   border-radius: 24px;
-  border: 5px solid var(--surface);
+  border: 6px solid var(--surface);
   overflow: hidden;
   display: grid;
   place-items: center;
@@ -129,7 +129,9 @@ p { margin: 0; }
   font-size: 24px;
   box-shadow: 0 10px 30px var(--shadow);
 }
-.avatar img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
+/* With a photo, use the border colour as background so no dark edge shows through the anti-aliased corners */
+.avatar:has(img) { background: var(--surface); }
+.avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; filter: grayscale(1); }
 
 h1 {
   font-size: clamp(36px, 6vw, 46px);
@@ -155,7 +157,8 @@ h1 {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 13px;
+  padding: 8px 14px;
+  line-height: 1;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--surface);
@@ -165,6 +168,8 @@ h1 {
   transition: border-color 0.2s, transform 0.2s;
 }
 .links a:hover { border-color: var(--muted); transform: translateY(-1px); }
+/* Red Hat Display sits high in its line box: lift icons to the optical center of the text */
+.links a svg { flex-shrink: 0; transform: translateY(-1px); }
 
 /* ---------- Sections ---------- */
 .section { padding-top: 56px; padding-bottom: 24px; }
