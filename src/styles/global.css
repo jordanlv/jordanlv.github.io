@@ -115,7 +115,7 @@ p { margin: 0; }
 :root:not([data-theme='dark']) .icon-sun { display: none; }
 
 /* ---------- Hero ---------- */
-.hero { padding-top: 36px; padding-bottom: 32px; }
+.hero { padding-top: 36px; padding-bottom: 100px; }
 
 .avatar {
   width: 96px;
@@ -206,41 +206,80 @@ h1 {
   font-weight: 600;
   letter-spacing: -0.02em;
 }
-.tag.count { font-size: 12px; font-weight: 400; letter-spacing: 0; color: var(--muted); }
-
-/* Native select styled as a pill */
-.select {
-  position: relative;
+.tag.count {
   display: inline-flex;
   align-items: center;
-  color: var(--soft);
-}
-.select select {
-  appearance: none;
-  -webkit-appearance: none;
-  font: inherit;
-  font-family: var(--mono);
+  justify-content: center;
+  height: 22px;
+  min-width: 22px;
+  padding: 0 7px;
+  line-height: 1;
   font-size: 12px;
-  color: inherit;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+/* ---------- Dropdown (custom listbox) ---------- */
+.dropdown { position: relative; }
+
+/* Pill buttons: dropdown trigger and "Show more" */
+.dropdown-trigger,
+.pill-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px 8px 16px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 6px 32px 6px 14px;
   cursor: pointer;
   transition: border-color 0.2s;
 }
-.select select:hover,
-.select select:focus-visible { border-color: var(--muted); outline: none; }
-.select svg { position: absolute; right: 12px; pointer-events: none; }
+.dropdown-trigger:hover,
+.dropdown-trigger:focus-visible,
+.pill-button:hover,
+.pill-button:focus-visible,
+.dropdown-trigger[aria-expanded='true'] { border-color: var(--muted); outline: none; }
+.dropdown-trigger svg,
+.pill-button svg { color: var(--muted); transition: transform 0.2s; }
+.dropdown-trigger[aria-expanded='true'] svg { transform: rotate(180deg); }
 
-.visually-hidden {
+.dropdown-menu {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 5;
+  min-width: 100%;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px var(--shadow);
+  outline: none;
 }
+.dropdown-menu[hidden] { display: none; }
+
+.dropdown-menu [role='option'] {
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--soft);
+  cursor: pointer;
+}
+.dropdown-menu [role='option']:hover,
+.dropdown-menu [role='option'].is-active { background: var(--thumb); color: var(--text); }
+.dropdown-menu [role='option'][aria-selected='true'] { background: var(--accent); color: var(--accent-text); }
 
 /* ---------- Publications ---------- */
 .pubs { list-style: none; margin: 0; padding: 0; }
@@ -254,6 +293,10 @@ h1 {
 .pub[hidden] { display: none; }
 /* Separator between visible items only, so filtering never leaves a stray line */
 .pub:not([hidden]) ~ .pub:not([hidden]) { border-top: 1px solid var(--border); }
+
+/* Bottom padding matches a publication item so the gap before Contact stays the same */
+.pubs-more { display: flex; justify-content: center; padding: 8px 0 28px; }
+.pubs-more:has(> [hidden]) { display: none; }
 
 .pub-thumb {
   aspect-ratio: 4 / 3;
@@ -308,9 +351,10 @@ h1 {
 .pub-summary { font-size: 15px; color: var(--soft); margin-top: 10px; }
 
 /* ---------- Contact ---------- */
+/* 120px of air on both sides: the last publication already adds 52px above (28 + 24) */
 .contact {
-  padding-top: 72px;
-  padding-bottom: 72px;
+  padding-top: 68px;
+  padding-bottom: 120px;
   text-align: center;
 }
 .contact-title {
@@ -328,8 +372,8 @@ h1 {
   border-radius: 999px;
   background: var(--accent);
   color: var(--accent-text);
-  font-family: var(--mono);
-  font-size: 13px;
+  font-size: 15px;
+  font-weight: 600;
   text-decoration: none;
   transition: opacity 0.2s;
 }
@@ -352,7 +396,7 @@ h1 {
   .container { padding: 0 16px; }
   .nav { gap: 14px; }
   .nav a:not(:last-of-type) { display: none; }
-  .hero { padding-top: 24px; }
+  .hero { padding-top: 24px; padding-bottom: 64px; }
   .pub { grid-template-columns: 1fr; gap: 16px; }
   .pub-thumb { aspect-ratio: 16 / 9; }
 }

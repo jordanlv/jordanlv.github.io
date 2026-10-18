@@ -26,14 +26,23 @@ const years = [...new Set(pubs.map((pub) => pub.year))];
       Publications <span class="tag count" data-pub-count>{pubs.length}</span>
     </h2>
 
-    <label class="select">
-      <span class="visually-hidden">Filter by date</span>
-      <select data-pub-filter>
-        <option value="">All dates</option>
-        {years.map((year) => <option value={year}>{year}</option>)}
-      </select>
-      <Icon name="caret" size={14} />
-    </label>
+    <div class="dropdown" data-pub-filter>
+      <button
+        type="button"
+        class="dropdown-trigger"
+        aria-haspopup="listbox"
+        aria-expanded="false"
+        aria-controls="pub-filter-menu"
+        aria-label="Filter by date"
+      >
+        <span data-dropdown-label>All dates</span>
+        <Icon name="caret" size={14} />
+      </button>
+      <ul class="dropdown-menu" id="pub-filter-menu" role="listbox" tabindex="-1" aria-label="Date" hidden>
+        <li role="option" id="pub-filter-all" data-value="" aria-selected="true">All dates</li>
+        {years.map((year) => <li role="option" id={`pub-filter-${year}`} data-value={year} aria-selected="false">{year}</li>)}
+      </ul>
+    </div>
   </div>
 
   <ol class="pubs">
@@ -90,20 +99,107 @@ const years = [...new Set(pubs.map((pub) => pub.year))];
       })
     }
   </ol>
+
+  <div class="pubs-more">
+    <button type="button" class="pill-button" data-pub-more hidden>
+      Show more publications
+      <Icon name="caret" size={14} />
+    </button>
+  </div>
 </section>
 
 <script>
-  const filter = document.querySelector<HTMLSelectElement>('[data-pub-filter]');
-  const count = document.querySelector<HTMLElement>('[data-pub-count]');
-  const items = document.querySelectorAll<HTMLElement>('.pub');
+  const PAGE_SIZE = 4;
 
-  filter?.addEventListener('change', () => {
-    let visible = 0;
+  const dropdown = document.querySelector<HTMLElement>('[data-pub-filter]');
+  const count = document.querySelector<HTMLElement>('[data-pub-count]');
+  const more = document.querySelector<HTMLButtonElement>('[data-pub-more]');
+  const items = [...document.querySelectorAll<HTMLElement>('.pub')];
+
+  // Shared list state: the date filter picks the matching papers,
+  // and only the first PAGE_SIZE are shown until "Show more" is clicked
+  let year = '';
+  let expanded = false;
+
+  const render = () => {
+    const matching = items.filter((item) => !year || item.dataset.year === year);
     items.forEach((item) => {
-      const show = !filter.value || item.dataset.year === filter.value;
-      item.hidden = !show;
-      if (show) visible++;
+      const index = matching.indexOf(item);
+      item.hidden = index === -1 || (!expanded && index >= PAGE_SIZE);
     });
-    if (count) count.textContent = String(visible);
+    if (count) count.textContent = String(matching.length);
+    if (more) more.hidden = expanded || matching.length <= PAGE_SIZE;
+  };
+
+  more?.addEventListener('click', () => {
+    expanded = true;
+    render();
   });
+
+  render();
+
+  if (dropdown) {
+    const trigger = dropdown.querySelector<HTMLButtonElement>('.dropdown-trigger')!;
+    const label = dropdown.querySelector<HTMLElement>('[data-dropdown-label]')!;
+    const menu = dropdown.querySelector<HTMLElement>('[role=listbox]')!;
+    const options = [...menu.querySelectorAll<HTMLElement>('[role=option]')];
+    let active = 0;
+
+    const setActive = (index: number) => {
+      active = (index + options.length) % options.length;
+      options.forEach((option, i) => option.classList.toggle('is-active', i === active));
+      menu.setAttribute('aria-activedescendant', options[active].id);
+    };
+
+    const open = () => {
+      menu.hidden = false;
+      trigger.setAttribute('aria-expanded', 'true');
+      setActive(options.findIndex((option) => option.getAttribute('aria-selected') === 'true'));
+      menu.focus();
+    };
+
+    const close = (refocus = true) => {
+      menu.hidden = true;
+      trigger.setAttribute('aria-expanded', 'false');
+      if (refocus) trigger.focus();
+    };
+
+    const select = (option: HTMLElement) => {
+      options.forEach((o) => o.setAttribute('aria-selected', String(o === option)));
+      label.textContent = option.textContent;
+      year = option.dataset.value ?? '';
+      expanded = false;
+      render();
+      close();
+    };
+
+    trigger.addEventListener('click', () => (menu.hidden ? open() : close()));
+    trigger.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        event.preventDefault();
+        open();
+      }
+    });
+
+    options.forEach((option, i) => {
+      option.addEventListener('click', () => select(option));
+      option.addEventListener('mousemove', () => setActive(i));
+    });
+
+    menu.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowDown') setActive(active + 1);
+      else if (event.key === 'ArrowUp') setActive(active - 1);
+      else if (event.key === 'Home') setActive(0);
+      else if (event.key === 'End') setActive(options.length - 1);
+      else if (event.key === 'Enter' || event.key === ' ') select(options[active]);
+      else if (event.key === 'Escape') close();
+      else if (event.key === 'Tab') return close(false);
+      else return;
+      event.preventDefault();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!menu.hidden && !dropdown.contains(event.target as Node)) close(false);
+    });
+  }
 </script>
