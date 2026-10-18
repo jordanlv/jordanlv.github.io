@@ -1,14 +1,17 @@
 /* ---------- Tokens ---------- */
 :root {
-  --bg: #fafafa;
+  /* Greys share one slightly blue hue */
+  --bg: #f9f9fb;
   --surface: #ffffff;
-  --text: #111111;
-  --muted: #8a8a8a;
-  --soft: #555555;
-  --border: #e6e6e6;
-  --thumb: #f0f0f0;
-  --accent: #111111;
+  --text: #17172a;
+  --soft: #3f3f55;
+  --muted: #6c6c84;
+  --faint: #a3a2bf;
+  --border: #e6e6ee;
+  --thumb: #f1f1f6;
+  --accent: #17172a;
   --accent-text: #ffffff;
+  --shadow: rgb(23 23 60 / 0.12);
 
   --sans: 'Red Hat Display', system-ui, -apple-system, sans-serif;
   --mono: 'Red Hat Mono', ui-monospace, monospace;
@@ -18,15 +21,17 @@
 }
 
 :root[data-theme='dark'] {
-  --bg: #0e0e0e;
-  --surface: #161616;
-  --text: #ededed;
-  --muted: #7a7a7a;
-  --soft: #a8a8a8;
-  --border: #262626;
-  --thumb: #1c1c1c;
-  --accent: #ededed;
-  --accent-text: #0e0e0e;
+  --bg: #0e0e14;
+  --surface: #17171f;
+  --text: #ececf3;
+  --soft: #b4b4c6;
+  --muted: #8a8aa1;
+  --faint: #5f5e7a;
+  --border: #26263a;
+  --thumb: #1b1b26;
+  --accent: #ececf3;
+  --accent-text: #0e0e14;
+  --shadow: rgb(0 0 0 / 0.4);
   color-scheme: dark;
 }
 
@@ -59,7 +64,7 @@ p { margin: 0; }
   padding: 0 20px;
 }
 
-.muted { color: var(--muted); }
+.muted { color: var(--faint); }
 .nowrap { white-space: nowrap; }
 
 /* ---------- Header ---------- */
@@ -109,18 +114,12 @@ p { margin: 0; }
 /* ---------- Hero ---------- */
 .hero { padding-top: 64px; padding-bottom: 32px; }
 
-.identity {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 32px;
-}
-
 .avatar {
-  flex-shrink: 0;
-  width: 72px;
-  height: 72px;
-  border-radius: 12px;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 20px;
+  border-radius: 24px;
+  border: 5px solid var(--surface);
   overflow: hidden;
   display: grid;
   place-items: center;
@@ -128,27 +127,26 @@ p { margin: 0; }
   color: var(--accent-text);
   font-weight: 700;
   font-size: 24px;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08), 0 6px 16px rgb(0 0 0 / 0.08);
+  box-shadow: 0 10px 30px var(--shadow);
 }
 .avatar img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
 
-.identity-name { font-weight: 700; font-size: 18px; line-height: 1.3; }
-.identity-role { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
-
 h1 {
-  font-size: clamp(34px, 6vw, 50px);
+  font-size: clamp(36px, 6vw, 46px);
   font-weight: 600;
-  line-height: 1.08;
+  line-height: 1.1;
   letter-spacing: -0.025em;
-  margin-bottom: 22px;
+  margin-bottom: 10px;
 }
 
-.bio { color: var(--soft); font-size: 17px; max-width: 620px; }
+.role { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+
+.bio { color: var(--soft); font-size: 16px; line-height: 1.5; max-width: 620px; }
 
 .links {
   list-style: none;
   padding: 0;
-  margin: 28px 0 0;
+  margin: 24px 0 0;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -156,12 +154,12 @@ h1 {
 .links a {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 7px 14px;
+  gap: 6px;
+  padding: 6px 13px;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--surface);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   text-decoration: none;
   transition: border-color 0.2s, transform 0.2s;

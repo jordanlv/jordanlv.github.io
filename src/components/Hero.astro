@@ -3,22 +3,21 @@ import Icon from './Icon.astro';
 import profile from '../data/profile.json';
 
 type IconName = 'github' | 'scholar' | 'linkedin' | 'mail';
+
+// First name in black, last name in grey
+const [firstName, ...rest] = profile.name.split(' ');
+const lastName = rest.join(' ');
 ---
 
 <section class="hero container" id="top">
-  <div class="identity">
-    <div class="avatar">
-      {profile.photo ? <img src={profile.photo} alt={profile.name} width="72" height="72" /> : <span>{profile.initials}</span>}
-    </div>
-    <div>
-      <p class="identity-name">{profile.name}</p>
-      <p class="identity-role">{profile.role}</p>
-    </div>
+  <div class="avatar">
+    {profile.photo ? <img src={profile.photo} alt={profile.name} width="88" height="88" /> : <span>{profile.initials}</span>}
   </div>
 
   <h1>
-    {profile.tagline[0]} <span class="muted">{profile.tagline[1]}</span>
+    {firstName} <span class="muted">{lastName}</span>
   </h1>
+  <p class="role">{profile.role}</p>
   <p class="bio">{profile.bio}</p>
 
   <ul class="links">
