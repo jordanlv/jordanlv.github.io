@@ -383,7 +383,9 @@ h1 {
 
 .pattern-hero {
   top: 0;
-  right: 0;
+  /* Hugs the viewport edge on smaller screens; on wide screens its right edge stops
+     700px from the centre so it stays near the content */
+  right: max(0px, calc(50% - 700px));
   width: min(560px, 100vw);
   height: 326px; /* 560 × 698 / 1200 */
 }
