@@ -149,7 +149,6 @@ h1 {
   position: relative;
   z-index: 20; /* above the sticky header while it slides in */
   transform-origin: 0 0;
-  will-change: transform;
 }
 
 .role { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-bottom: 16px; }
@@ -183,21 +182,64 @@ h1 {
 .links a svg { flex-shrink: 0; transform: translateY(-1px); }
 
 /* ---------- Sections ---------- */
-.section { padding-top: 56px; padding-bottom: 24px; }
+.section { padding-top: 40px; padding-bottom: 24px; }
+
+.divider {
+  margin: 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 4px;
+}
 
 .section-title {
-  font-size: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 22px;
   font-weight: 600;
   letter-spacing: -0.02em;
-  margin-bottom: 8px;
 }
-.count {
+.tag.count { font-size: 12px; font-weight: 400; letter-spacing: 0; color: var(--muted); }
+
+/* Native select styled as a pill */
+.select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: var(--soft);
+}
+.select select {
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
   font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--muted);
-  vertical-align: middle;
-  margin-left: 4px;
+  font-size: 12px;
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 32px 6px 14px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.select select:hover,
+.select select:focus-visible { border-color: var(--muted); outline: none; }
+.select svg { position: absolute; right: 12px; pointer-events: none; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 /* ---------- Publications ---------- */
@@ -208,9 +250,10 @@ h1 {
   grid-template-columns: 168px 1fr;
   gap: 24px;
   padding: 28px 0;
-  border-bottom: 1px solid var(--border);
 }
-.pub:last-child { border-bottom: none; }
+.pub[hidden] { display: none; }
+/* Separator between visible items only, so filtering never leaves a stray line */
+.pub:not([hidden]) ~ .pub:not([hidden]) { border-top: 1px solid var(--border); }
 
 .pub-thumb {
   aspect-ratio: 4 / 3;
@@ -253,7 +296,6 @@ h1 {
   color: var(--soft);
   text-decoration: none;
 }
-.tag-link:hover { border-color: var(--muted); color: var(--text); }
 
 .pub-title { font-size: 18px; font-weight: 600; line-height: 1.35; letter-spacing: -0.01em; }
 .pub-title a { text-decoration: none; }
@@ -264,8 +306,6 @@ h1 {
 .pub-authors strong { color: var(--text); font-weight: 600; }
 
 .pub-summary { font-size: 15px; color: var(--soft); margin-top: 10px; }
-
-.pub-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
 
 /* ---------- Contact ---------- */
 .contact {

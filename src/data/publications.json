@@ -7,7 +7,7 @@
     "type": "Preprint",
     "summary": "An online approach to fault detection for mobile robots, where lightweight models running on the robot keep adapting to new operating conditions over time.",
     "image": "",
-    "links": { "arxiv": "https://arxiv.org/abs/2609.29194" }
+    "url": "https://arxiv.org/abs/2609.29194"
   },
   {
     "title": "Analyzing Shapley Additive Explanations to Understand Anomaly Detection Algorithm Behaviors and Their Complementarity",
@@ -17,7 +17,7 @@
     "type": "Conference",
     "summary": "Uses SHAP contributions to compare how different anomaly detection algorithms make their decisions, and to identify which detectors complement each other.",
     "image": "",
-    "links": {}
+    "url": ""
   },
   {
     "title": "Problématiques de la détection d'anomalies pour la détection de fautes dans la robotique mobile",
@@ -28,7 +28,7 @@
     "lang": "fr",
     "summary": "An overview of the open challenges in applying anomaly detection to fault detection on mobile robots.",
     "image": "",
-    "links": {}
+    "url": ""
   },
   {
     "title": "Timeciel: Contextual Interactive Ensemble Learning for Time Series Classification",
@@ -38,7 +38,7 @@
     "type": "Conference",
     "summary": "Timeciel, a contextual and interactive ensemble learning method for time series classification, built on a multi-agent approach.",
     "image": "",
-    "links": {}
+    "url": ""
   },
   {
     "title": "Création d'un jeu de données pour la détection de fautes sur les robots autonomes de service",
@@ -49,7 +49,7 @@
     "lang": "fr",
     "summary": "Building a dataset of real faults recorded on autonomous service robots, to train and evaluate fault detection methods.",
     "image": "",
-    "links": {}
+    "url": ""
   },
   {
     "title": "Caractérisation de la complémentarité des détecteurs d'anomalies par l'analyse des contributions SHAP",
@@ -60,7 +60,7 @@
     "lang": "fr",
     "summary": "French version of our work on characterising the complementarity of anomaly detectors through SHAP contributions.",
     "image": "",
-    "links": {}
+    "url": ""
   },
   {
     "title": "Modèle ensembliste multi-agents pour la détection d'anomalies explicable : application à la robotique de service",
@@ -71,7 +71,7 @@
     "lang": "fr",
     "summary": "A multi-agent ensemble model for explainable anomaly detection, applied to service robotics.",
     "image": "",
-    "links": {}
+    "url": ""
   },
   {
     "title": "Détection d'anomalies explicable pour la sûreté et la longue autonomie des robots autonomes de service",
@@ -82,6 +82,6 @@
     "lang": "fr",
     "summary": "How explainable anomaly detection can improve the safety and long-term autonomy of service robots.",
     "image": "",
-    "links": {}
+    "url": ""
   }
 ]

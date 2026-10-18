@@ -11,27 +11,37 @@ interface Publication {
   lang?: string;
   summary: string;
   image?: string;
-  links: { arxiv?: string; pdf?: string; code?: string; doi?: string; bibtex?: string };
+  url?: string; // paper page (PDF, arXiv, DOI…), opened from the title
 }
 
 const SELF = 'J. Levy';
-const LINK_LABELS = { pdf: 'PDF', arxiv: 'arXiv', doi: 'DOI', code: 'Code', bibtex: 'BibTeX' } as const;
 
 const pubs = (publications as Publication[]).toSorted((a, b) => b.year - a.year);
+const years = [...new Set(pubs.map((pub) => pub.year))];
 ---
 
 <section class="section container" id="publications">
-  <h2 class="section-title">
-    Publications <span class="count">{pubs.length}</span>
-  </h2>
+  <div class="section-head">
+    <h2 class="section-title">
+      Publications <span class="tag count" data-pub-count>{pubs.length}</span>
+    </h2>
+
+    <label class="select">
+      <span class="visually-hidden">Filter by date</span>
+      <select data-pub-filter>
+        <option value="">All dates</option>
+        {years.map((year) => <option value={year}>{year}</option>)}
+      </select>
+      <Icon name="caret" size={14} />
+    </label>
+  </div>
 
   <ol class="pubs">
     {
       pubs.map((pub) => {
-        const mainUrl = pub.links.pdf ?? pub.links.arxiv ?? pub.links.doi;
         const words = pub.title.split(' ');
         return (
-          <li class="pub">
+          <li class="pub" data-year={pub.year}>
             <div class="pub-thumb">
               {pub.image ? (
                 <img src={pub.image} alt="" loading="lazy" />
@@ -50,8 +60,8 @@ const pubs = (publications as Publication[]).toSorted((a, b) => b.year - a.year)
               </p>
 
               <h3 class="pub-title">
-                {mainUrl ? (
-                  <a href={mainUrl} target="_blank" rel="noopener">
+                {pub.url ? (
+                  <a href={pub.url} target="_blank" rel="noopener">
                     {words.slice(0, -1).join(' ')}{' '}
                     {/* Keep the arrow on the same line as the last word */}
                     <span class="nowrap">
@@ -74,18 +84,6 @@ const pubs = (publications as Publication[]).toSorted((a, b) => b.year - a.year)
               </p>
 
               <p class="pub-summary">{pub.summary}</p>
-
-              {Object.keys(pub.links).length > 0 && (
-                <div class="pub-links">
-                  {(Object.keys(LINK_LABELS) as (keyof typeof LINK_LABELS)[])
-                    .filter((key) => pub.links[key])
-                    .map((key) => (
-                      <a class="tag tag-link" href={pub.links[key]} target="_blank" rel="noopener">
-                        {LINK_LABELS[key]}
-                      </a>
-                    ))}
-                </div>
-              )}
             </div>
           </li>
         );
@@ -93,3 +91,19 @@ const pubs = (publications as Publication[]).toSorted((a, b) => b.year - a.year)
     }
   </ol>
 </section>
+
+<script>
+  const filter = document.querySelector<HTMLSelectElement>('[data-pub-filter]');
+  const count = document.querySelector<HTMLElement>('[data-pub-count]');
+  const items = document.querySelectorAll<HTMLElement>('.pub');
+
+  filter?.addEventListener('change', () => {
+    let visible = 0;
+    items.forEach((item) => {
+      const show = !filter.value || item.dataset.year === filter.value;
+      item.hidden = !show;
+      if (show) visible++;
+    });
+    if (count) count.textContent = String(visible);
+  });
+</script>

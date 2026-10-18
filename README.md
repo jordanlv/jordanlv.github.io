@@ -25,5 +25,5 @@ npm run build    # static output in dist/
 ## Editing content
 
 - Profile, bio, links, research topics: `src/data/profile.json`
-- Publications: `src/data/publications.json` (optional links: `pdf`, `arxiv`, `doi`, `code`, `bibtex`)
+- Publications: `src/data/publications.json` (`url` = link opened from the title, `image` = thumbnail)
 - Photo: drop it in `public/` and set `"photo": "/photo.jpg"` in `profile.json`

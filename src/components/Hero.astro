@@ -43,7 +43,6 @@ const lastName = rest.join(' ');
   if (name && logo) {
     const easeInOut = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
     let geometry = { dx: 0, scale: 1, distance: 1 };
-    let ticking = false;
 
     const measure = () => {
       name.style.transform = '';
@@ -62,7 +61,6 @@ const lastName = rest.join(' ');
     };
 
     const update = () => {
-      ticking = false;
       const progress = Math.min(1, Math.max(0, window.scrollY / geometry.distance));
       const t = easeInOut(progress);
       const scale = 1 + (geometry.scale - 1) * t;
@@ -73,12 +71,9 @@ const lastName = rest.join(' ');
       logo.classList.toggle('is-visible', docked);
     };
 
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(update);
-      }
-    }, { passive: true });
+    // Scroll events already fire at most once per frame, so update directly:
+    // going through requestAnimationFrame made the name lag when rAF is throttled
+    window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', measure);
     document.fonts.ready.then(measure);
     measure();
