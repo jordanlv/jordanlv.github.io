@@ -67,7 +67,8 @@ p { margin: 0; }
   width: 100%;
   max-width: var(--max);
   margin: 0 auto;
-  padding: 0 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .muted { color: var(--faint); }
@@ -467,7 +468,10 @@ h1 {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 640px) {
-  .container { padding: 0 16px; }
+  /* Side padding only: a `padding` shorthand here would reset the sections' vertical spacing */
+  .container { padding-left: 32px; padding-right: 32px; }
+  /* Narrow screens only show part of the hero pattern: use its sparser left side */
+  .pattern-hero { -webkit-mask-position: left top; mask-position: left top; }
   .nav { gap: 14px; }
   .nav a:not(:last-of-type) { display: none; }
   .hero { padding-top: 24px; padding-bottom: 64px; }
