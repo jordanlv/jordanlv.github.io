@@ -9,6 +9,7 @@
   --faint: #a3a2bf;
   --border: #e6e6ee;
   --thumb: #f1f1f6;
+  --dots: #d9d8ea;
   --accent: #17172a;
   --accent-text: #ffffff;
   --shadow: rgb(23 23 60 / 0.12);
@@ -29,6 +30,7 @@
   --faint: #5f5e7a;
   --border: #26263a;
   --thumb: #1b1b26;
+  --dots: #2a2a42;
   --accent: #ececf3;
   --accent-text: #0e0e14;
   --shadow: rgb(0 0 0 / 0.4);
@@ -41,6 +43,10 @@
 *::after { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+/* Decorative patterns bleed past the viewport edges; clip (unlike hidden) keeps the sticky header working */
+html, body { overflow-x: clip; }
+/* ...and the bottom one bleeds past the footer: clip it so it adds no extra scroll space */
+body { overflow-y: clip; }
 
 body {
   margin: 0;
@@ -72,6 +78,11 @@ p { margin: 0; }
   position: sticky;
   top: 0;
   z-index: 10;
+  /* Transparent at the top so the hero pattern runs behind it; frosted once the page scrolls */
+  background: transparent;
+  transition: background-color 0.25s ease;
+}
+.header.is-scrolled {
   background: color-mix(in srgb, var(--bg) 80%, transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -355,6 +366,65 @@ h1 {
 .pub-summary { font-size: 15px; color: var(--soft); margin-top: 10px; }
 
 /* ---------- Contact ---------- */
+/* ---------- Dot pattern ----------
+   The PNG is used as an alpha mask so the dots take the theme colour (light and dark).
+   The mask is always drawn at the same size (--pattern-size) so dots keep one scale everywhere;
+   each element only crops the part it needs. */
+.pattern {
+  --pattern-size: 560px;
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--dots);
+  -webkit-mask: url(/patterns/dots.webp) right top / var(--pattern-size) auto no-repeat;
+  mask: url(/patterns/dots.webp) right top / var(--pattern-size) auto no-repeat;
+}
+
+.pattern-hero {
+  top: 0;
+  right: 0;
+  width: min(560px, 100vw);
+  height: 326px; /* 560 × 698 / 1200 */
+}
+
+/* Contact: two discreet patches placed relative to the centred text (not the viewport),
+   so they stay close to it on any screen width.
+   Each box stays inside the 560 × 326 image (no hard edge where the image ends)
+   and a centred radial fade softens all four sides. */
+.contact { position: relative; }
+.pattern-contact {
+  width: 300px;
+  opacity: 0.75;
+}
+/* Right of the title: the same full pattern as the hero (no crop, no repetition).
+   Its top and right edges are cut in the source image, so they get a linear fade */
+.pattern-contact-tr {
+  top: -110px;
+  left: calc(50% + 140px);
+  width: 560px;
+  height: 326px;
+  -webkit-mask:
+    url(/patterns/dots.webp) right top / var(--pattern-size) auto no-repeat,
+    linear-gradient(to bottom, transparent, #000 30%),
+    linear-gradient(to left, transparent, #000 30%);
+  mask:
+    url(/patterns/dots.webp) right top / var(--pattern-size) auto no-repeat intersect,
+    linear-gradient(to bottom, transparent, #000 30%) intersect,
+    linear-gradient(to left, transparent, #000 30%);
+}
+/* Left of the button, dropping into the gap before the footer */
+.pattern-contact-bl {
+  top: 110px;
+  right: calc(50% + 190px);
+  height: 280px;
+  -webkit-mask:
+    url(/patterns/dots.webp) -80px -20px / var(--pattern-size) auto no-repeat,
+    radial-gradient(closest-side, #000 30%, transparent);
+  mask:
+    url(/patterns/dots.webp) -80px -20px / var(--pattern-size) auto no-repeat intersect,
+    radial-gradient(closest-side, #000 30%, transparent);
+}
+
 /* 120px of air on both sides: the last publication already adds 52px above (28 + 24) */
 .contact {
   padding-top: 68px;

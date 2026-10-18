@@ -22,6 +22,11 @@ const lastName = rest.join(' ');
 </header>
 
 <script>
+  const header = document.querySelector<HTMLElement>('.header');
+  const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 0);
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  updateHeader();
+
   const button = document.querySelector<HTMLButtonElement>('.theme-toggle');
   button?.addEventListener('click', () => {
     const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
