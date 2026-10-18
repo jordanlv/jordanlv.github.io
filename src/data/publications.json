@@ -2,17 +2,21 @@
   {
     "title": "Continuous Online Fault Detection for Mobile Robots via Adaptive Edge Models",
     "authors": ["J. Levy", "N. Verstaevel", "V. Talon", "B. Gaudou"],
-    "venue": "arXiv preprint arXiv:2609.29194",
+    "venue": "arXiv preprint",
     "year": 2026,
-    "type": "preprint",
+    "type": "Preprint",
+    "summary": "An online approach to fault detection for mobile robots, where lightweight models running on the robot keep adapting to new operating conditions over time.",
+    "image": "",
     "links": { "arxiv": "https://arxiv.org/abs/2609.29194" }
   },
   {
     "title": "Analyzing Shapley Additive Explanations to Understand Anomaly Detection Algorithm Behaviors and Their Complementarity",
     "authors": ["J. Levy", "P. Saves", "M. Garouani", "N. Verstaevel", "B. Gaudou"],
-    "venue": "International Symposium on Intelligent Data Analysis (IDA), pp. 126–140",
+    "venue": "Intelligent Data Analysis (IDA)",
     "year": 2026,
-    "type": "conference",
+    "type": "Conference",
+    "summary": "Uses SHAP contributions to compare how different anomaly detection algorithms make their decisions, and to identify which detectors complement each other.",
+    "image": "",
     "links": {}
   },
   {
@@ -20,52 +24,64 @@
     "authors": ["J. Levy", "N. Verstaevel", "V. Talon", "B. Gaudou"],
     "venue": "Journée Robotique et IA",
     "year": 2026,
-    "type": "workshop",
+    "type": "Workshop",
     "lang": "fr",
+    "summary": "An overview of the open challenges in applying anomaly detection to fault detection on mobile robots.",
+    "image": "",
     "links": {}
   },
   {
     "title": "Timeciel: Contextual Interactive Ensemble Learning for Time Series Classification",
     "authors": ["J. Levy", "C. Blanco-Volle", "N. Verstaevel", "B. Gaudou", "V. Talon"],
-    "venue": "International Conference on Practical Applications of Agents and Multi-Agent Systems (PAAMS)",
+    "venue": "PAAMS",
     "year": 2025,
-    "type": "conference",
+    "type": "Conference",
+    "summary": "Timeciel, a contextual and interactive ensemble learning method for time series classification, built on a multi-agent approach.",
+    "image": "",
     "links": {}
   },
   {
     "title": "Création d'un jeu de données pour la détection de fautes sur les robots autonomes de service",
     "authors": ["J. Levy", "M. Galinier", "B. Gaudou", "N. Verstaevel", "V. Talon"],
-    "venue": "Journée portes ouvertes neOCampus",
+    "venue": "neOCampus",
     "year": 2025,
-    "type": "workshop",
+    "type": "Workshop",
     "lang": "fr",
-    "links": {}
-  },
-  {
-    "title": "Modèle ensembliste multi-agents pour la détection d'anomalies explicable : application à la robotique de service",
-    "authors": ["J. Levy", "B. Gaudou", "N. Verstaevel", "V. Talon"],
-    "venue": "Journées Francophones sur les Systèmes Multi-Agents (JFSMA)",
-    "year": 2024,
-    "type": "conference",
-    "lang": "fr",
-    "links": {}
-  },
-  {
-    "title": "Détection d'anomalies explicable pour la sûreté et la longue autonomie des robots autonomes de service",
-    "authors": ["J. Levy", "B. Gaudou", "N. Verstaevel", "V. Talon"],
-    "venue": "Journée portes ouvertes neOCampus",
-    "year": 2024,
-    "type": "workshop",
-    "lang": "fr",
+    "summary": "Building a dataset of real faults recorded on autonomous service robots, to train and evaluate fault detection methods.",
+    "image": "",
     "links": {}
   },
   {
     "title": "Caractérisation de la complémentarité des détecteurs d'anomalies par l'analyse des contributions SHAP",
     "authors": ["J. Levy", "P. Saves", "M. Garouani", "N. Verstaevel", "B. Gaudou"],
     "venue": "",
-    "year": null,
-    "type": "other",
+    "year": 2025,
+    "type": "Paper",
     "lang": "fr",
+    "summary": "French version of our work on characterising the complementarity of anomaly detectors through SHAP contributions.",
+    "image": "",
+    "links": {}
+  },
+  {
+    "title": "Modèle ensembliste multi-agents pour la détection d'anomalies explicable : application à la robotique de service",
+    "authors": ["J. Levy", "B. Gaudou", "N. Verstaevel", "V. Talon"],
+    "venue": "JFSMA",
+    "year": 2024,
+    "type": "Conference",
+    "lang": "fr",
+    "summary": "A multi-agent ensemble model for explainable anomaly detection, applied to service robotics.",
+    "image": "",
+    "links": {}
+  },
+  {
+    "title": "Détection d'anomalies explicable pour la sûreté et la longue autonomie des robots autonomes de service",
+    "authors": ["J. Levy", "B. Gaudou", "N. Verstaevel", "V. Talon"],
+    "venue": "neOCampus",
+    "year": 2024,
+    "type": "Workshop",
+    "lang": "fr",
+    "summary": "How explainable anomaly detection can improve the safety and long-term autonomy of service robots.",
+    "image": "",
     "links": {}
   }
 ]

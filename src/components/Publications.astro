@@ -6,64 +6,77 @@ interface Publication {
   title: string;
   authors: string[];
   venue: string;
-  year: number | null;
+  year: number;
   type: string;
   lang?: string;
+  summary: string;
+  image?: string;
   links: { arxiv?: string; pdf?: string; code?: string; doi?: string; bibtex?: string };
 }
 
 const SELF = 'J. Levy';
 const LINK_LABELS = { pdf: 'PDF', arxiv: 'arXiv', doi: 'DOI', code: 'Code', bibtex: 'BibTeX' } as const;
 
-// Group by year, most recent first; undated entries go last
-const groups = new Map<string, Publication[]>();
-for (const pub of publications as Publication[]) {
-  const key = pub.year ? String(pub.year) : 'Other';
-  if (!groups.has(key)) groups.set(key, []);
-  groups.get(key)!.push(pub);
-}
-const years = [...groups.keys()].sort((a, b) => (a === 'Other' ? 1 : b === 'Other' ? -1 : Number(b) - Number(a)));
+const pubs = (publications as Publication[]).toSorted((a, b) => b.year - a.year);
 ---
 
 <section class="section container" id="publications">
   <h2 class="section-title">
-    Publications <span class="count">{publications.length}</span>
+    Publications <span class="count">{pubs.length}</span>
   </h2>
 
-  {
-    years.map((year) => (
-      <div class="year-group">
-        <h3 class="year">{year}</h3>
-        <ol class="pubs">
-          {groups.get(year)!.map((pub) => {
-            const mainUrl = pub.links.pdf ?? pub.links.arxiv ?? pub.links.doi;
-            return (
-              <li class="pub">
-                <h4 class="pub-title">
-                  {mainUrl ? (
-                    <a href={mainUrl} target="_blank" rel="noopener">
-                      {pub.title.split(' ').slice(0, -1).join(' ')}{' '}
-                      {/* Keep the arrow on the same line as the last word */}
-                      <span class="nowrap">
-                        {pub.title.split(' ').at(-1)}
-                        <Icon name="arrow" size={14} />
-                      </span>
-                    </a>
-                  ) : (
-                    pub.title
-                  )}
-                </h4>
-                <p class="pub-authors">
-                  {pub.authors.map((author, i) => (
-                    <>
-                      {author === SELF ? <strong>{author}</strong> : author}
-                      {i < pub.authors.length - 1 && ', '}
-                    </>
-                  ))}
-                </p>
-                <div class="pub-meta">
-                  {pub.venue && <em>{pub.venue}</em>}
-                  {pub.lang === 'fr' && <span class="tag">FR</span>}
+  <ol class="pubs">
+    {
+      pubs.map((pub) => {
+        const mainUrl = pub.links.pdf ?? pub.links.arxiv ?? pub.links.doi;
+        const words = pub.title.split(' ');
+        return (
+          <li class="pub">
+            <div class="pub-thumb">
+              {pub.image ? (
+                <img src={pub.image} alt="" loading="lazy" />
+              ) : (
+                <span>{pub.venue || pub.type}</span>
+              )}
+            </div>
+
+            <div class="pub-body">
+              <p class="pub-meta">
+                <span>{pub.year}</span>
+                <span aria-hidden="true">–</span>
+                <span>{pub.venue || pub.type}</span>
+                <span class="tag">{pub.type}</span>
+                {pub.lang === 'fr' && <span class="tag">FR</span>}
+              </p>
+
+              <h3 class="pub-title">
+                {mainUrl ? (
+                  <a href={mainUrl} target="_blank" rel="noopener">
+                    {words.slice(0, -1).join(' ')}{' '}
+                    {/* Keep the arrow on the same line as the last word */}
+                    <span class="nowrap">
+                      {words.at(-1)}
+                      <Icon name="arrow" size={14} />
+                    </span>
+                  </a>
+                ) : (
+                  pub.title
+                )}
+              </h3>
+
+              <p class="pub-authors">
+                {pub.authors.map((author, i) => (
+                  <>
+                    {author === SELF ? <strong>{author}</strong> : author}
+                    {i < pub.authors.length - 1 && ', '}
+                  </>
+                ))}
+              </p>
+
+              <p class="pub-summary">{pub.summary}</p>
+
+              {Object.keys(pub.links).length > 0 && (
+                <div class="pub-links">
                   {(Object.keys(LINK_LABELS) as (keyof typeof LINK_LABELS)[])
                     .filter((key) => pub.links[key])
                     .map((key) => (
@@ -72,11 +85,11 @@ const years = [...groups.keys()].sort((a, b) => (a === 'Other' ? 1 : b === 'Othe
                       </a>
                     ))}
                 </div>
-              </li>
-            );
-          })}
-        </ol>
-      </div>
-    ))
-  }
+              )}
+            </div>
+          </li>
+        );
+      })
+    }
+  </ol>
 </section>

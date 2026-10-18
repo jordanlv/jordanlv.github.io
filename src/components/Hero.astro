@@ -6,14 +6,18 @@ type IconName = 'github' | 'scholar' | 'linkedin' | 'mail';
 ---
 
 <section class="hero container" id="top">
-  <div class="avatar">
-    {profile.photo ? <img src={profile.photo} alt={profile.name} /> : <span>{profile.initials}</span>}
+  <div class="identity">
+    <div class="avatar">
+      {profile.photo ? <img src={profile.photo} alt={profile.name} width="72" height="72" /> : <span>{profile.initials}</span>}
+    </div>
+    <div>
+      <p class="identity-name">{profile.name}</p>
+      <p class="identity-role">{profile.role}</p>
+    </div>
   </div>
 
-  <p class="eyebrow">{profile.role}</p>
   <h1>
-    {profile.name}
-    <span class="muted">— explainable anomaly detection for autonomous robots.</span>
+    {profile.tagline[0]} <span class="muted">{profile.tagline[1]}</span>
   </h1>
   <p class="bio">{profile.bio}</p>
 
