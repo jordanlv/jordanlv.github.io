@@ -1,0 +1,19 @@
+---
+import profile from '../data/profile.json';
+
+const linkedin = profile.links.find((link) => link.icon === 'linkedin');
+---
+
+<section class="section container contact" id="contact">
+  <h2 class="contact-title">Let's talk <span class="muted">research.</span></h2>
+  <p>
+    Interested in a collaboration or have a question about my work? The fastest way to reach me is by
+    <a href={`mailto:${profile.email}`}>email</a>{linkedin && <> or on <a href={linkedin.url} target="_blank" rel="noopener">LinkedIn</a></>}.
+  </p>
+  <a class="button" href={`mailto:${profile.email}`}>{profile.email}</a>
+</section>
+
+<footer class="footer container">
+  <span>© {new Date().getFullYear()} {profile.name}</span>
+  <span>{profile.location}</span>
+</footer>

@@ -1,0 +1,71 @@
+[
+  {
+    "title": "Continuous Online Fault Detection for Mobile Robots via Adaptive Edge Models",
+    "authors": ["J. Levy", "N. Verstaevel", "V. Talon", "B. Gaudou"],
+    "venue": "arXiv preprint arXiv:2609.29194",
+    "year": 2026,
+    "type": "preprint",
+    "links": { "arxiv": "https://arxiv.org/abs/2609.29194" }
+  },
+  {
+    "title": "Analyzing Shapley Additive Explanations to Understand Anomaly Detection Algorithm Behaviors and Their Complementarity",
+    "authors": ["J. Levy", "P. Saves", "M. Garouani", "N. Verstaevel", "B. Gaudou"],
+    "venue": "International Symposium on Intelligent Data Analysis (IDA), pp. 126–140",
+    "year": 2026,
+    "type": "conference",
+    "links": {}
+  },
+  {
+    "title": "Problématiques de la détection d'anomalies pour la détection de fautes dans la robotique mobile",
+    "authors": ["J. Levy", "N. Verstaevel", "V. Talon", "B. Gaudou"],
+    "venue": "Journée Robotique et IA",
+    "year": 2026,
+    "type": "workshop",
+    "lang": "fr",
+    "links": {}
+  },
+  {
+    "title": "Timeciel: Contextual Interactive Ensemble Learning for Time Series Classification",
+    "authors": ["J. Levy", "C. Blanco-Volle", "N. Verstaevel", "B. Gaudou", "V. Talon"],
+    "venue": "International Conference on Practical Applications of Agents and Multi-Agent Systems (PAAMS)",
+    "year": 2025,
+    "type": "conference",
+    "links": {}
+  },
+  {
+    "title": "Création d'un jeu de données pour la détection de fautes sur les robots autonomes de service",
+    "authors": ["J. Levy", "M. Galinier", "B. Gaudou", "N. Verstaevel", "V. Talon"],
+    "venue": "Journée portes ouvertes neOCampus",
+    "year": 2025,
+    "type": "workshop",
+    "lang": "fr",
+    "links": {}
+  },
+  {
+    "title": "Modèle ensembliste multi-agents pour la détection d'anomalies explicable : application à la robotique de service",
+    "authors": ["J. Levy", "B. Gaudou", "N. Verstaevel", "V. Talon"],
+    "venue": "Journées Francophones sur les Systèmes Multi-Agents (JFSMA)",
+    "year": 2024,
+    "type": "conference",
+    "lang": "fr",
+    "links": {}
+  },
+  {
+    "title": "Détection d'anomalies explicable pour la sûreté et la longue autonomie des robots autonomes de service",
+    "authors": ["J. Levy", "B. Gaudou", "N. Verstaevel", "V. Talon"],
+    "venue": "Journée portes ouvertes neOCampus",
+    "year": 2024,
+    "type": "workshop",
+    "lang": "fr",
+    "links": {}
+  },
+  {
+    "title": "Caractérisation de la complémentarité des détecteurs d'anomalies par l'analyse des contributions SHAP",
+    "authors": ["J. Levy", "P. Saves", "M. Garouani", "N. Verstaevel", "B. Gaudou"],
+    "venue": "",
+    "year": null,
+    "type": "other",
+    "lang": "fr",
+    "links": {}
+  }
+]

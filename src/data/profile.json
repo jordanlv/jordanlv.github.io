@@ -1,0 +1,29 @@
+{
+  "name": "Jordan Levy",
+  "initials": "JL",
+  "photo": "",
+  "role": "PhD Candidate at IRIT · Research Engineer at TwinswHeel",
+  "location": "Toulouse, France",
+  "bio": "I work on explainable anomaly detection for autonomous service robots. My research combines time series analysis, ensemble and multi-agent learning, and explainability methods such as SHAP to detect faults early and understand why they happen.",
+  "email": "jordan.levy@irit.fr",
+  "links": [
+    { "label": "Google Scholar", "icon": "scholar", "url": "https://scholar.google.com/citations?user=TgsC2w4AAAAJ" },
+    { "label": "GitHub", "icon": "github", "url": "https://github.com/jordan-levy" },
+    { "label": "LinkedIn", "icon": "linkedin", "url": "https://www.linkedin.com/in/jordan-levy" },
+    { "label": "Email", "icon": "mail", "url": "mailto:jordan.levy@irit.fr" }
+  ],
+  "research": [
+    {
+      "title": "Anomaly detection",
+      "description": "Detecting faults on mobile robots from multivariate sensor streams, online and on the edge."
+    },
+    {
+      "title": "Explainability",
+      "description": "Using SHAP contributions to understand what anomaly detectors see and how they complement each other."
+    },
+    {
+      "title": "Time series",
+      "description": "Interactive and multi-agent ensemble learning for time series classification."
+    }
+  ]
+}

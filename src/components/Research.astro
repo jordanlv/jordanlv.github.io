@@ -1,0 +1,18 @@
+---
+import profile from '../data/profile.json';
+---
+
+<section class="section container" id="research">
+  <h2 class="section-title">Research</h2>
+  <div class="cards">
+    {
+      profile.research.map((topic, i) => (
+        <article class="card">
+          <span class="card-index">0{i + 1}</span>
+          <h3>{topic.title}</h3>
+          <p>{topic.description}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
