@@ -178,8 +178,12 @@ h1 {
   transition: border-color 0.2s, transform 0.2s;
 }
 .links a:hover { border-color: var(--muted); transform: translateY(-1px); }
-/* Red Hat Display sits high in its line box: lift icons to the optical center of the text */
-.links a svg { flex-shrink: 0; transform: translateY(-1px); }
+/* Each icon's ink sits differently in its box: shift it onto the optical center of the label
+   (halfway between cap-height and x-height centers), measured per icon */
+.links a svg { flex-shrink: 0; transform: translateY(var(--icon-shift, 0px)); }
+.links a[data-icon='github'] { --icon-shift: 0.25px; }
+.links a[data-icon='linkedin'],
+.links a[data-icon='mail'] { --icon-shift: 0.5px; }
 
 /* ---------- Sections ---------- */
 .section { padding-top: 40px; padding-bottom: 24px; }
