@@ -115,7 +115,7 @@ p { margin: 0; }
 :root:not([data-theme='dark']) .icon-sun { display: none; }
 
 /* ---------- Hero ---------- */
-.hero { padding-top: 64px; padding-bottom: 32px; }
+.hero { padding-top: 36px; padding-bottom: 32px; }
 
 .avatar {
   width: 96px;
@@ -312,7 +312,7 @@ h1 {
   .container { padding: 0 16px; }
   .nav { gap: 14px; }
   .nav a:not(:last-of-type) { display: none; }
-  .hero { padding-top: 40px; }
+  .hero { padding-top: 24px; }
   .pub { grid-template-columns: 1fr; gap: 16px; }
   .pub-thumb { aspect-ratio: 16 / 9; }
 }
