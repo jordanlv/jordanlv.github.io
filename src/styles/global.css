@@ -85,10 +85,13 @@ p { margin: 0; }
 }
 
 .logo {
-  font-weight: 700;
-  font-size: 17px;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.025em;
   text-decoration: none;
 }
+/* The hero name animates into this spot on scroll; the logo only shows once it has docked */
+.js .logo:not(.is-visible) { opacity: 0; pointer-events: none; }
 
 .nav { display: flex; align-items: center; gap: 22px; font-family: var(--mono); font-size: 13px; }
 .nav a { text-decoration: none; color: var(--soft); transition: color 0.2s; }
@@ -139,6 +142,14 @@ h1 {
   line-height: 1.1;
   letter-spacing: -0.025em;
   margin-bottom: 10px;
+}
+
+.hero-name {
+  display: inline-block;
+  position: relative;
+  z-index: 20; /* above the sticky header while it slides in */
+  transform-origin: 0 0;
+  will-change: transform;
 }
 
 .role { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-bottom: 16px; }

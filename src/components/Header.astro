@@ -1,11 +1,15 @@
 ---
 import Icon from './Icon.astro';
 import profile from '../data/profile.json';
+
+const [firstName, ...rest] = profile.name.split(' ');
+const lastName = rest.join(' ');
 ---
 
 <header class="header">
   <div class="container header-inner">
-    <a href="#top" class="logo">{profile.name}</a>
+    <!-- Hidden at the top of the page: the hero name morphs into this spot on scroll (see Hero.astro) -->
+    <a href="#top" class="logo">{firstName} <span class="muted">{lastName}</span></a>
     <nav class="nav">
       <a href="#publications">Publications</a>
       <a href="#contact">Contact</a>

@@ -15,7 +15,7 @@ const lastName = rest.join(' ');
   </div>
 
   <h1>
-    {firstName} <span class="muted">{lastName}</span>
+    <span class="hero-name">{firstName} <span class="muted">{lastName}</span></span>
   </h1>
   <p class="role">{profile.role}</p>
   <p class="bio">{profile.bio}</p>
@@ -33,3 +33,54 @@ const lastName = rest.join(' ');
     }
   </ul>
 </section>
+
+<script>
+  // Scroll-linked morph: the hero name shrinks and slides into the header logo spot,
+  // then hands over to the real header logo. Scrolling back up reverses it.
+  const name = document.querySelector<HTMLElement>('.hero-name');
+  const logo = document.querySelector<HTMLElement>('.logo');
+
+  if (name && logo) {
+    const easeInOut = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
+    let geometry = { dx: 0, scale: 1, distance: 1 };
+    let ticking = false;
+
+    const measure = () => {
+      name.style.transform = '';
+      const n = name.getBoundingClientRect();
+      const l = logo.getBoundingClientRect(); // sticky header: constant viewport position
+      const scale = parseFloat(getComputedStyle(logo).fontSize) / parseFloat(getComputedStyle(name).fontSize);
+      // Top the scaled name must reach so it sits vertically centred on the logo
+      const targetTop = l.top + (l.height - n.height * scale) / 2;
+      geometry = {
+        dx: l.left - n.left,
+        scale,
+        // Scroll offset at which the name, moving up with the page, reaches targetTop
+        distance: Math.max(1, n.top + window.scrollY - targetTop),
+      };
+      update();
+    };
+
+    const update = () => {
+      ticking = false;
+      const progress = Math.min(1, Math.max(0, window.scrollY / geometry.distance));
+      const t = easeInOut(progress);
+      const scale = 1 + (geometry.scale - 1) * t;
+      // Vertical motion comes from the page scroll itself; only x and scale are animated
+      name.style.transform = `translate(${geometry.dx * t}px, 0) scale(${scale})`;
+      const docked = progress >= 1;
+      name.style.visibility = docked ? 'hidden' : '';
+      logo.classList.toggle('is-visible', docked);
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }, { passive: true });
+    window.addEventListener('resize', measure);
+    document.fonts.ready.then(measure);
+    measure();
+  }
+</script>

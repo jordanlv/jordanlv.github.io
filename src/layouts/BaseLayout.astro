@@ -32,6 +32,7 @@ const { title, description } = Astro.props;
         try { theme = localStorage.getItem('theme'); } catch {}
         if (!theme) theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         document.documentElement.dataset.theme = theme;
+        document.documentElement.classList.add('js');
       })();
     </script>
   </head>
