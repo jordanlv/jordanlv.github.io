@@ -25,6 +25,6 @@ npm run build    # static output in dist/
 ## Editing content
 
 - Profile, bio (EN/FR), links: `src/data/profile.json`
-- Papers: one file per paper in `src/content/papers/`. The file name is the page URL (`/papers/<name>/` and `/fr/papers/<name>/`). The front matter holds the metadata (`summary` in EN and FR, `url` = original source, `image` = figure under `public/`), the body is the article shown on its page, in the paper's own language
+- Papers: one file per paper in `src/content/papers/`. The file name is the page URL (`/papers/<name>/` and `/fr/papers/<name>/`). The front matter holds the metadata (`summary` in EN and FR, `url` = original source, `image` = figure under `public/papers/`, 16:9, ideally 1440 × 810 px — used for the list thumbnail and the paper page), the body is the article shown on its page, in the paper's own language
 - Interface texts in both languages: `src/i18n.ts`
 - Photo: drop it in `public/` and set `"photo": "/photo.jpg"` in `profile.json`

@@ -313,7 +313,7 @@ h1 {
 
 .pub {
   display: grid;
-  grid-template-columns: 168px 1fr;
+  grid-template-columns: 240px 1fr; /* 16:9 thumbnail of 240 × 135 */
   gap: 24px;
   padding: 28px 0;
 }
@@ -329,7 +329,7 @@ h1 {
 .pub-thumb {
   text-decoration: none;
   transition: border-color 0.2s;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9; /* same ratio as the paper page figure: one 1440×810 image per paper */
   border-radius: 10px;
   overflow: hidden;
   background: var(--thumb);
@@ -536,7 +536,6 @@ h1 {
   .nav { gap: 14px; }
   .hero { padding-top: 24px; padding-bottom: 64px; }
   .pub { grid-template-columns: 1fr; gap: 16px; }
-  .pub-thumb { aspect-ratio: 16 / 9; }
 }
 
 @media (prefers-reduced-motion: reduce) {
