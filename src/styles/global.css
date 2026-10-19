@@ -17,7 +17,7 @@
   --sans: 'Red Hat Display', system-ui, -apple-system, sans-serif;
   --mono: 'Red Hat Mono', ui-monospace, monospace;
   --radius: 14px;
-  --max: 760px;
+  --max: 860px;
   color-scheme: light;
 }
 
@@ -65,8 +65,8 @@ p { margin: 0; }
   width: 100%;
   max-width: var(--max);
   margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 56px;
+  padding-right: 56px;
 }
 
 .muted { color: var(--faint); }
