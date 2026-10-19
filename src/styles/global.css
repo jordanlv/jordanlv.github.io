@@ -45,8 +45,6 @@
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 /* Decorative patterns bleed past the viewport edges; clip (unlike hidden) keeps the sticky header working */
 html, body { overflow-x: clip; }
-/* ...and the bottom one bleeds past the footer: clip it so it adds no extra scroll space */
-body { overflow-y: clip; }
 
 body {
   margin: 0;
@@ -310,7 +308,7 @@ h1 {
 /* Separator between visible items only, so filtering never leaves a stray line */
 .pub:not([hidden]) ~ .pub:not([hidden]) { border-top: 1px solid var(--border); }
 
-/* Bottom padding matches a publication item so the gap before Contact stays the same */
+/* Bottom padding matches a publication item so the gap before the footer stays the same */
 .pubs-more { display: flex; justify-content: center; padding: 8px 0 28px; }
 .pubs-more:has(> [hidden]) { display: none; }
 
@@ -366,7 +364,6 @@ h1 {
 
 .pub-summary { font-size: 15px; color: var(--soft); margin-top: 10px; }
 
-/* ---------- Contact ---------- */
 /* ---------- Dot pattern ----------
    The PNG is used as an alpha mask so the dots take the theme colour (light and dark).
    The mask is always drawn at the same size (--pattern-size) so dots keep one scale everywhere;
@@ -389,72 +386,17 @@ h1 {
   width: min(560px, 100vw);
   height: 326px; /* 560 × 698 / 1200 */
 }
-
-/* Contact: two discreet patches placed relative to the centred text (not the viewport),
-   so they stay close to it on any screen width.
-   Each box stays inside the 560 × 326 image (no hard edge where the image ends)
-   and a centred radial fade softens all four sides. */
-.contact { position: relative; }
-.pattern-contact {
-  width: 300px;
-  opacity: 0.75;
+/* Once it no longer touches the viewport edge, the image's cut right side would show: fade it */
+@media (min-width: 1401px) {
+  .pattern-hero {
+    -webkit-mask:
+      url(/patterns/dots.webp) right top / var(--pattern-size) auto no-repeat,
+      linear-gradient(to left, transparent, #000 35%);
+    mask:
+      url(/patterns/dots.webp) right top / var(--pattern-size) auto no-repeat intersect,
+      linear-gradient(to left, transparent, #000 35%);
+  }
 }
-/* Right of the title: the same full pattern as the hero (no crop, no repetition).
-   Its top and right edges are cut in the source image, so they get a linear fade */
-.pattern-contact-tr {
-  top: -110px;
-  left: calc(50% + 140px);
-  width: 560px;
-  height: 326px;
-  -webkit-mask:
-    url(/patterns/dots.webp) right top / var(--pattern-size) auto no-repeat,
-    linear-gradient(to bottom, transparent, #000 30%),
-    linear-gradient(to left, transparent, #000 30%);
-  mask:
-    url(/patterns/dots.webp) right top / var(--pattern-size) auto no-repeat intersect,
-    linear-gradient(to bottom, transparent, #000 30%) intersect,
-    linear-gradient(to left, transparent, #000 30%);
-}
-/* Left of the button, dropping into the gap before the footer */
-.pattern-contact-bl {
-  top: 110px;
-  right: calc(50% + 190px);
-  height: 280px;
-  -webkit-mask:
-    url(/patterns/dots.webp) -80px -20px / var(--pattern-size) auto no-repeat,
-    radial-gradient(closest-side, #000 30%, transparent);
-  mask:
-    url(/patterns/dots.webp) -80px -20px / var(--pattern-size) auto no-repeat intersect,
-    radial-gradient(closest-side, #000 30%, transparent);
-}
-
-/* 120px of air on both sides: the last publication already adds 52px above (28 + 24) */
-.contact {
-  padding-top: 68px;
-  padding-bottom: 120px;
-  text-align: center;
-}
-.contact-title {
-  font-size: clamp(30px, 5vw, 40px);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin-bottom: 12px;
-}
-.contact p { color: var(--soft); max-width: 480px; margin: 0 auto 26px; }
-.contact p a { text-underline-offset: 3px; }
-
-.button {
-  display: inline-block;
-  padding: 10px 20px;
-  border-radius: 999px;
-  background: var(--accent);
-  color: var(--accent-text);
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-.button:hover { opacity: 0.85; }
 
 /* ---------- Footer ---------- */
 .footer {
@@ -462,6 +404,7 @@ h1 {
   justify-content: space-between;
   padding-top: 20px;
   padding-bottom: 32px;
+  margin-top: 72px;
   border-top: 1px solid var(--border);
   font-family: var(--mono);
   font-size: 12px;
