@@ -14,6 +14,7 @@ summary:
   en: "An overview of the open challenges in applying anomaly detection to fault detection on mobile robots."
   fr: "Un tour d’horizon des défis ouverts pour appliquer la détection d’anomalies à la détection de fautes en robotique mobile."
 url: "https://hal.science/hal-05686514v1"
+image: "/papers/problematiques-detection-anomalies-robotique-mobile.webp"
 keywords:
   - "Détection d'anomalies"
   - "Détection de fautes"

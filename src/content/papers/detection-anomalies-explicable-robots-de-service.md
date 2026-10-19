@@ -10,6 +10,7 @@ year: 2024
 date: 2024-07-03
 type: Workshop
 format: poster
+image: "/papers/detection-anomalies-explicable-robots-de-service.webp"
 lang: fr
 summary:
   en: "How explainable anomaly detection can improve the safety and long-term autonomy of service robots."

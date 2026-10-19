@@ -11,6 +11,7 @@ year: 2024
 date: 2024-11-06
 type: Conference
 format: poster
+image: "/papers/modele-ensembliste-multi-agents-anomalies.webp"
 lang: fr
 summary:
   en: "A multi-agent ensemble model for explainable anomaly detection, applied to service robotics."

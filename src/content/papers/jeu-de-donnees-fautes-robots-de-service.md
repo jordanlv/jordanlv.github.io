@@ -11,6 +11,7 @@ year: 2025
 date: 2025-06-06
 type: Workshop
 format: poster
+image: "/papers/jeu-de-donnees-fautes-robots-de-service.webp"
 lang: fr
 summary:
   en: "Building a dataset of real faults recorded on autonomous service robots, to train and evaluate fault detection methods."
