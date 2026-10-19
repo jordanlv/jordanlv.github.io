@@ -1,0 +1,22 @@
+---
+import { ui, type Lang } from '../i18n';
+import type { Paper } from '../lib/papers';
+
+interface Props {
+  paper: Paper;
+  lang: Lang;
+}
+
+const { paper, lang } = Astro.props;
+const { year, venue, type } = paper.data;
+const t = ui[lang];
+---
+
+<p class="pub-meta">
+  <span>{year}</span>
+  <span aria-hidden="true">–</span>
+  <span>{venue || t.types[type]}</span>
+  <span class="tag">{t.types[type]}</span>
+  {/* Flag papers written in the other language */}
+  {paper.data.lang !== lang && <span class="tag">{paper.data.lang.toUpperCase()}</span>}
+</p>

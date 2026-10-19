@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import Publications from './Publications.astro';
+import Footer from './Footer.astro';
+import profile from '../data/profile.json';
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<BaseLayout lang={lang} title={profile.name} description={`${profile.name} — ${profile.role[lang]}. ${profile.bio[lang]}`}>
+  <Header lang={lang} isHome />
+  <div class="pattern pattern-hero" aria-hidden="true"></div>
+  <main>
+    <Hero lang={lang} />
+    <div class="container"><hr class="divider" /></div>
+    <Publications lang={lang} />
+  </main>
+  <Footer />
+</BaseLayout>

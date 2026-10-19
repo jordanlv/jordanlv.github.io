@@ -1,0 +1,114 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import Icon from './Icon.astro';
+import PaperMeta from './PaperMeta.astro';
+import PaperAuthors from './PaperAuthors.astro';
+import profile from '../data/profile.json';
+import { homePath, otherLang, ui, type Lang } from '../i18n';
+import { paperPath, sourceName, toBibtex, type Paper } from '../lib/papers';
+
+interface Props {
+  paper: Paper;
+  lang: Lang;
+}
+
+const { paper, lang } = Astro.props;
+const t = ui[lang];
+const { title, authors, venue, venueFull, type, summary, image, url, keywords } = paper.data;
+const { Content } = await render(paper);
+const hasContent = Boolean(paper.body?.trim());
+const bibtex = toBibtex(paper);
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${title} — ${profile.name}`}
+  description={summary[lang]}
+  alternates={{ en: paperPath('en', paper.id), fr: paperPath('fr', paper.id) }}
+>
+  <Header lang={lang} alternateHref={paperPath(otherLang(lang), paper.id)} />
+  <div class="pattern pattern-hero" aria-hidden="true"></div>
+
+  <main class="container paper">
+    <a class="back-link" href={`${homePath[lang]}#publications`}>
+      <Icon name="back" size={14} />
+      {t.allPublications}
+    </a>
+
+    <header class="paper-head">
+      <PaperMeta paper={paper} lang={lang} />
+      {/* The official title stays in the paper's own language */}
+      <h1 class="paper-title" lang={paper.data.lang}>{title}</h1>
+      <PaperAuthors authors={authors} class="paper-authors" />
+      {venueFull && <p class="paper-venue">{venueFull}</p>}
+      <p class="paper-lede">{summary[lang]}</p>
+
+      <div class="paper-actions">
+        {url && (
+          <a class="button" href={url} target="_blank" rel="noopener">
+            {t.readOn} {sourceName(url)}
+            <Icon name="arrow" size={14} />
+          </a>
+        )}
+        <button type="button" class="pill-button" data-copy-bibtex>
+          <span class="copy-idle"><Icon name="copy" size={14} /> {t.copyBibtex}</span>
+          <span class="copy-done" hidden><Icon name="check" size={14} /> {t.copied}</span>
+        </button>
+      </div>
+    </header>
+
+    <figure class="paper-figure">
+      {image ? <img src={image} alt="" /> : <span>{venue || t.types[type]}</span>}
+    </figure>
+
+    {/* The article body is written in the paper's own language */}
+    <article class="prose" lang={paper.data.lang}>
+      {hasContent ? <Content /> : <p class="prose-empty">{t.comingSoon}</p>}
+    </article>
+
+    {
+      keywords.length > 0 && (
+        <section class="paper-section">
+          <h2 class="paper-section-title">{t.keywords}</h2>
+          <ul class="paper-keywords">
+            {keywords.map((keyword) => (
+              <li class="tag">{keyword}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <section class="paper-section">
+      <h2 class="paper-section-title">{t.cite}</h2>
+      <pre class="bibtex"><code data-bibtex>{bibtex}</code></pre>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-copy-bibtex]');
+  const bibtex = document.querySelector<HTMLElement>('[data-bibtex]');
+
+  button?.addEventListener('click', async () => {
+    if (!bibtex) return;
+    try {
+      await navigator.clipboard.writeText(bibtex.textContent ?? '');
+    } catch {
+      return;
+    }
+    const idle = button.querySelector<HTMLElement>('.copy-idle')!;
+    const done = button.querySelector<HTMLElement>('.copy-done')!;
+    idle.hidden = true;
+    done.hidden = false;
+    setTimeout(() => {
+      idle.hidden = false;
+      done.hidden = true;
+    }, 2000);
+  });
+</script>

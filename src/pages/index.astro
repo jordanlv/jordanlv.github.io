@@ -1,19 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import Publications from '../components/Publications.astro';
-import Footer from '../components/Footer.astro';
-import profile from '../data/profile.json';
+import HomePage from '../components/HomePage.astro';
 ---
 
-<BaseLayout title={profile.name} description={`${profile.name} — ${profile.role}. ${profile.bio}`}>
-  <Header />
-  <div class="pattern pattern-hero" aria-hidden="true"></div>
-  <main>
-    <Hero />
-    <div class="container"><hr class="divider" /></div>
-    <Publications />
-  </main>
-  <Footer />
-</BaseLayout>
+<HomePage lang="en" />

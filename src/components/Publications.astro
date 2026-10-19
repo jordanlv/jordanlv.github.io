@@ -1,29 +1,25 @@
 ---
 import Icon from './Icon.astro';
-import publications from '../data/publications.json';
+import PaperMeta from './PaperMeta.astro';
+import PaperAuthors from './PaperAuthors.astro';
+import { ui, type Lang } from '../i18n';
+import { getPapers, paperPath } from '../lib/papers';
 
-interface Publication {
-  title: string;
-  authors: string[];
-  venue: string;
-  year: number;
-  type: string;
-  lang?: string;
-  summary: string;
-  image?: string;
-  url?: string; // paper page (PDF, arXiv, DOI…), opened from the title
+interface Props {
+  lang: Lang;
 }
 
-const SELF = 'J. Levy';
+const { lang } = Astro.props;
+const t = ui[lang];
 
-const pubs = (publications as Publication[]).toSorted((a, b) => b.year - a.year);
-const years = [...new Set(pubs.map((pub) => pub.year))];
+const papers = await getPapers();
+const years = [...new Set(papers.map((paper) => paper.data.year))];
 ---
 
 <section class="section container" id="publications">
   <div class="section-head">
     <h2 class="section-title">
-      Publications <span class="tag count" data-pub-count>{pubs.length}</span>
+      {t.publications} <span class="tag count" data-pub-count>{papers.length}</span>
     </h2>
 
     <div class="dropdown" data-pub-filter>
@@ -33,13 +29,13 @@ const years = [...new Set(pubs.map((pub) => pub.year))];
         aria-haspopup="listbox"
         aria-expanded="false"
         aria-controls="pub-filter-menu"
-        aria-label="Filter by date"
+        aria-label={t.filterByDate}
       >
-        <span data-dropdown-label>All dates</span>
+        <span data-dropdown-label>{t.allDates}</span>
         <Icon name="caret" size={14} />
       </button>
-      <ul class="dropdown-menu" id="pub-filter-menu" role="listbox" tabindex="-1" aria-label="Date" hidden>
-        <li role="option" id="pub-filter-all" data-value="" aria-selected="true">All dates</li>
+      <ul class="dropdown-menu" id="pub-filter-menu" role="listbox" tabindex="-1" aria-label={t.date} hidden>
+        <li role="option" id="pub-filter-all" data-value="" aria-selected="true">{t.allDates}</li>
         {years.map((year) => <li role="option" id={`pub-filter-${year}`} data-value={year} aria-selected="false">{year}</li>)}
       </ul>
     </div>
@@ -47,52 +43,23 @@ const years = [...new Set(pubs.map((pub) => pub.year))];
 
   <ol class="pubs">
     {
-      pubs.map((pub) => {
-        const words = pub.title.split(' ');
+      papers.map((paper) => {
+        const { title, authors, venue, year, type, image } = paper.data;
+        const href = paperPath(lang, paper.id);
         return (
-          <li class="pub" data-year={pub.year}>
-            <div class="pub-thumb">
-              {pub.image ? (
-                <img src={pub.image} alt="" loading="lazy" />
-              ) : (
-                <span>{pub.venue || pub.type}</span>
-              )}
-            </div>
+          <li class="pub" data-year={year}>
+            {/* Decorative duplicate of the title link: hidden from assistive tech and tab order */}
+            <a class="pub-thumb" href={href} tabindex="-1" aria-hidden="true">
+              {image ? <img src={image} alt="" loading="lazy" /> : <span>{venue || t.types[type]}</span>}
+            </a>
 
             <div class="pub-body">
-              <p class="pub-meta">
-                <span>{pub.year}</span>
-                <span aria-hidden="true">–</span>
-                <span>{pub.venue || pub.type}</span>
-                <span class="tag">{pub.type}</span>
-                {pub.lang === 'fr' && <span class="tag">FR</span>}
-              </p>
-
+              <PaperMeta paper={paper} lang={lang} />
               <h3 class="pub-title">
-                {pub.url ? (
-                  <a href={pub.url} target="_blank" rel="noopener">
-                    {words.slice(0, -1).join(' ')}{' '}
-                    {/* Keep the arrow on the same line as the last word */}
-                    <span class="nowrap">
-                      {words.at(-1)}
-                      <Icon name="arrow" size={14} />
-                    </span>
-                  </a>
-                ) : (
-                  pub.title
-                )}
+                <a href={href}>{title}</a>
               </h3>
-
-              <p class="pub-authors">
-                {pub.authors.map((author, i) => (
-                  <>
-                    {author === SELF ? <strong>{author}</strong> : author}
-                    {i < pub.authors.length - 1 && ', '}
-                  </>
-                ))}
-              </p>
-
-              <p class="pub-summary">{pub.summary}</p>
+              <PaperAuthors authors={authors} />
+              <p class="pub-summary">{paper.data.summary[lang]}</p>
             </div>
           </li>
         );
@@ -102,7 +69,7 @@ const years = [...new Set(pubs.map((pub) => pub.year))];
 
   <div class="pubs-more">
     <button type="button" class="pill-button" data-pub-more hidden>
-      Show more publications
+      {t.showMore}
       <Icon name="caret" size={14} />
     </button>
   </div>

@@ -1,6 +1,13 @@
 ---
 import Icon from './Icon.astro';
 import profile from '../data/profile.json';
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
 
 type IconName = 'github' | 'scholar' | 'linkedin' | 'mail';
 
@@ -17,8 +24,8 @@ const lastName = rest.join(' ');
   <h1>
     <span class="hero-name">{firstName} <span class="muted">{lastName}</span></span>
   </h1>
-  <p class="role">{profile.role}</p>
-  <p class="bio">{profile.bio}</p>
+  <p class="role">{profile.role[lang]}</p>
+  <p class="bio">{profile.bio[lang]}</p>
 
   <ul class="links">
     {

@@ -1,0 +1,13 @@
+---
+import PaperPage from '../../components/PaperPage.astro';
+import { getPapers, type Paper } from '../../lib/papers';
+
+export async function getStaticPaths() {
+  const papers = await getPapers();
+  return papers.map((paper) => ({ params: { slug: paper.id }, props: { paper } }));
+}
+
+const { paper } = Astro.props as { paper: Paper };
+---
+
+<PaperPage paper={paper} lang="en" />

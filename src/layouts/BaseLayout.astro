@@ -1,16 +1,20 @@
 ---
 import '../styles/global.css';
+import { homePath, languages, type Lang } from '../i18n';
 
 interface Props {
+  lang: Lang;
   title: string;
   description: string;
+  /** This page's URL in each language (defaults to the home pages) */
+  alternates?: Record<Lang, string>;
 }
 
-const { title, description } = Astro.props;
+const { lang, title, description, alternates = homePath } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,6 +22,8 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    {languages.map((l) => <link rel="alternate" hreflang={l} href={alternates[l]} />)}
+    <link rel="alternate" hreflang="x-default" href={alternates.en} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

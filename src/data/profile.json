@@ -1,9 +1,16 @@
 {
   "name": "Jordan Levy",
   "initials": "JL",
-  "photo": "/photo.webp",  "role": "PhD Candidate at IRIT · Research Engineer at TwinswHeel",
+  "photo": "/photo.webp",
+  "role": {
+    "en": "PhD Candidate at IRIT · Research Engineer at TwinswHeel",
+    "fr": "Doctorant à l'IRIT · Ingénieur de recherche chez TwinswHeel"
+  },
   "location": "Toulouse, France",
-  "bio": "I work on explainable anomaly detection for autonomous service robots. My research combines time series analysis, ensemble and multi-agent learning, and explainability methods such as SHAP to detect faults early and understand why they happen.",
+  "bio": {
+    "en": "I work on explainable anomaly detection for autonomous service robots. My research combines time series analysis, ensemble and multi-agent learning, and explainability methods such as SHAP to detect faults early and understand why they happen.",
+    "fr": "Je travaille sur la détection d'anomalies explicable pour les robots de service autonomes. Mes recherches combinent l'analyse de séries temporelles, l'apprentissage ensembliste et multi-agents, et des méthodes d'explicabilité comme SHAP pour détecter les fautes au plus tôt et comprendre pourquoi elles surviennent."
+  },
   "email": "jordan.levy@irit.fr",
   "links": [
     { "label": "Google Scholar", "icon": "scholar", "url": "https://scholar.google.com/citations?user=TgsC2w4AAAAJ" },
