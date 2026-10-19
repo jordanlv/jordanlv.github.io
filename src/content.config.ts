@@ -13,6 +13,7 @@ const papers = defineCollection({
     year: z.number(),
     date: z.coerce.date().optional(), // exact publication date, used for ordering
     type: z.enum(['Preprint', 'Conference', 'Workshop', 'Paper']),
+    format: z.enum(['article', 'poster']).default('article'), // used by the list filter
     lang: z.enum(['en', 'fr']), // language the paper is written in
     summary: z.object({ en: z.string(), fr: z.string() }),
     image: z.string().optional(), // figure used as thumbnail, path under public/

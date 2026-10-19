@@ -10,6 +10,7 @@ venueFull: "Journées Francophones sur les Systèmes Multi-Agents (JFSMA 2024)"
 year: 2024
 date: 2024-11-06
 type: Conference
+format: poster
 lang: fr
 summary:
   en: "A multi-agent ensemble model for explainable anomaly detection, applied to service robotics."

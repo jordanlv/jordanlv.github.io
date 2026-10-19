@@ -13,6 +13,12 @@ export const ui = {
     filterByDate: 'Filter by date',
     date: 'Date',
     allDates: 'All dates',
+    filterByFormat: 'Filter by type',
+    allFormats: 'All types',
+    formats: { article: 'Articles', poster: 'Posters' },
+    filterByLanguage: 'Filter by language',
+    allLanguages: 'All languages',
+    noResults: 'No publication matches these filters.',
     showMore: 'Show more publications',
     toggleTheme: 'Toggle dark mode',
     switchLanguage: 'Voir le site en français',
@@ -31,6 +37,12 @@ export const ui = {
     filterByDate: 'Filtrer par date',
     date: 'Date',
     allDates: 'Toutes les dates',
+    filterByFormat: 'Filtrer par type',
+    allFormats: 'Tous les types',
+    formats: { article: 'Articles', poster: 'Posters' },
+    filterByLanguage: 'Filtrer par langue',
+    allLanguages: 'Toutes les langues',
+    noResults: 'Aucune publication ne correspond à ces filtres.',
     showMore: 'Voir plus de publications',
     toggleTheme: 'Activer ou désactiver le mode sombre',
     switchLanguage: 'View the site in English',
@@ -45,5 +57,8 @@ export const ui = {
     comingSoon: 'Une présentation complète de cet article arrive bientôt.',
   },
 } as const;
+
+/** Each language's name, written in that language (used in the language filter) */
+export const languageNames: Record<Lang, string> = { en: 'English', fr: 'Français' };
 
 export const otherLang = (lang: Lang): Lang => (lang === 'en' ? 'fr' : 'en');

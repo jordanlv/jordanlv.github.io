@@ -1,0 +1,121 @@
+---
+// Custom listbox dropdown. `selected` picks the initial option (the first one by default).
+// On selection it dispatches a bubbling `dropdown-change` event: detail = { name, value }.
+import Icon from './Icon.astro';
+
+interface Option {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  name: string; // identifies the dropdown in the change event
+  label: string; // accessible name, e.g. "Filter by date"
+  options: Option[];
+  selected?: string; // value of the initially selected option
+}
+
+const { name, label, options } = Astro.props;
+const selected = options.find((option) => option.value === Astro.props.selected) ?? options[0];
+const menuId = `dropdown-${name}-menu`;
+---
+
+<div class="dropdown" data-dropdown={name}>
+  <button
+    type="button"
+    class="dropdown-trigger"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    aria-controls={menuId}
+    aria-label={label}
+  >
+    <span data-dropdown-label>{selected.label}</span>
+    <Icon name="caret" size={14} />
+  </button>
+  <ul class="dropdown-menu" id={menuId} role="listbox" tabindex="-1" aria-label={label} hidden>
+    {
+      options.map((option, i) => (
+        <li role="option" id={`${menuId}-${i}`} data-value={option.value} aria-selected={String(option === selected)}>
+          {option.label}
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-dropdown]').forEach((dropdown) => {
+    const trigger = dropdown.querySelector<HTMLButtonElement>('.dropdown-trigger')!;
+    const label = dropdown.querySelector<HTMLElement>('[data-dropdown-label]')!;
+    const menu = dropdown.querySelector<HTMLElement>('[role=listbox]')!;
+    const options = [...menu.querySelectorAll<HTMLElement>('[role=option]')];
+    let active = 0;
+
+    const setActive = (index: number) => {
+      active = (index + options.length) % options.length;
+      options.forEach((option, i) => option.classList.toggle('is-active', i === active));
+      menu.setAttribute('aria-activedescendant', options[active].id);
+    };
+
+    const open = () => {
+      // Only one menu open at a time
+      document.querySelectorAll<HTMLElement>('[data-dropdown] [role=listbox]').forEach((other) => {
+        if (other !== menu && !other.hidden) {
+          other.hidden = true;
+          other.closest('[data-dropdown]')?.querySelector('.dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+        }
+      });
+      menu.hidden = false;
+      trigger.setAttribute('aria-expanded', 'true');
+      setActive(options.findIndex((option) => option.getAttribute('aria-selected') === 'true'));
+      menu.focus();
+    };
+
+    const close = (refocus = true) => {
+      menu.hidden = true;
+      trigger.setAttribute('aria-expanded', 'false');
+      if (refocus) trigger.focus();
+    };
+
+    const select = (option: HTMLElement) => {
+      options.forEach((o) => o.setAttribute('aria-selected', String(o === option)));
+      label.textContent = option.textContent?.trim() ?? '';
+      close();
+      dropdown.dispatchEvent(
+        new CustomEvent('dropdown-change', {
+          bubbles: true,
+          detail: { name: dropdown.dataset.dropdown, value: option.dataset.value ?? '' },
+        }),
+      );
+    };
+
+    trigger.addEventListener('click', () => (menu.hidden ? open() : close()));
+    trigger.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        event.preventDefault();
+        open();
+      }
+    });
+
+    options.forEach((option, i) => {
+      option.addEventListener('click', () => select(option));
+      option.addEventListener('mousemove', () => setActive(i));
+    });
+
+    menu.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowDown') setActive(active + 1);
+      else if (event.key === 'ArrowUp') setActive(active - 1);
+      else if (event.key === 'Home') setActive(0);
+      else if (event.key === 'End') setActive(options.length - 1);
+      else if (event.key === 'Enter' || event.key === ' ') select(options[active]);
+      else if (event.key === 'Escape') close();
+      else if (event.key === 'Tab') return close(false);
+      else return;
+      event.preventDefault();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!menu.hidden && !dropdown.contains(event.target as Node)) close(false);
+    });
+  });
+</script>

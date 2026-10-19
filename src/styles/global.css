@@ -215,11 +215,15 @@ h1 {
 
 .section-head {
   display: flex;
+  flex-wrap: wrap; /* filters drop under the title when space runs out */
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 4px;
 }
+
+/* Filter dropdowns grouped side by side */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .section-title {
   display: flex;
@@ -318,6 +322,7 @@ h1 {
 .pub:not([hidden]) ~ .pub:not([hidden]) { border-top: 1px solid var(--border); }
 
 /* Bottom padding matches a publication item so the gap before the footer stays the same */
+.pubs-empty { padding: 40px 0; text-align: center; font-size: 15px; color: var(--muted); }
 .pubs-more { display: flex; justify-content: center; padding: 8px 0 28px; }
 .pubs-more:has(> [hidden]) { display: none; }
 

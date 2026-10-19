@@ -1,8 +1,9 @@
 ---
 import Icon from './Icon.astro';
+import Dropdown from './Dropdown.astro';
 import PaperMeta from './PaperMeta.astro';
 import PaperAuthors from './PaperAuthors.astro';
-import { ui, type Lang } from '../i18n';
+import { languageNames, languages, ui, type Lang } from '../i18n';
 import { getPapers, paperPath } from '../lib/papers';
 
 interface Props {
@@ -13,7 +14,11 @@ const { lang } = Astro.props;
 const t = ui[lang];
 
 const papers = await getPapers();
+
+// Filter options only list values that actually occur
 const years = [...new Set(papers.map((paper) => paper.data.year))];
+const formats = (['article', 'poster'] as const).filter((format) => papers.some((paper) => paper.data.format === format));
+const paperLangs = languages.filter((l) => papers.some((paper) => paper.data.lang === l));
 ---
 
 <section class="section container" id="publications">
@@ -22,32 +27,34 @@ const years = [...new Set(papers.map((paper) => paper.data.year))];
       {t.publications} <span class="tag count" data-pub-count>{papers.length}</span>
     </h2>
 
-    <div class="dropdown" data-pub-filter>
-      <button
-        type="button"
-        class="dropdown-trigger"
-        aria-haspopup="listbox"
-        aria-expanded="false"
-        aria-controls="pub-filter-menu"
-        aria-label={t.filterByDate}
-      >
-        <span data-dropdown-label>{t.allDates}</span>
-        <Icon name="caret" size={14} />
-      </button>
-      <ul class="dropdown-menu" id="pub-filter-menu" role="listbox" tabindex="-1" aria-label={t.date} hidden>
-        <li role="option" id="pub-filter-all" data-value="" aria-selected="true">{t.allDates}</li>
-        {years.map((year) => <li role="option" id={`pub-filter-${year}`} data-value={year} aria-selected="false">{year}</li>)}
-      </ul>
+    <div class="filters">
+      <Dropdown
+        name="year"
+        label={t.filterByDate}
+        options={[{ value: '', label: t.allDates }, ...years.map((year) => ({ value: String(year), label: String(year) }))]}
+      />
+      <Dropdown
+        name="format"
+        label={t.filterByFormat}
+        options={[{ value: '', label: t.allFormats }, ...formats.map((format) => ({ value: format, label: t.formats[format] }))]}
+        selected="article"
+      />
+      <Dropdown
+        name="lang"
+        label={t.filterByLanguage}
+        options={[{ value: '', label: t.allLanguages }, ...paperLangs.map((l) => ({ value: l, label: languageNames[l] }))]}
+        selected="en"
+      />
     </div>
   </div>
 
   <ol class="pubs">
     {
       papers.map((paper) => {
-        const { title, authors, venue, year, type, image } = paper.data;
+        const { title, authors, venue, year, type, image, format } = paper.data;
         const href = paperPath(lang, paper.id);
         return (
-          <li class="pub" data-year={year}>
+          <li class="pub" data-year={year} data-format={format} data-lang={paper.data.lang}>
             {/* Decorative duplicate of the title link: hidden from assistive tech and tab order */}
             <a class="pub-thumb" href={href} tabindex="-1" aria-hidden="true">
               {image ? <img src={image} alt="" loading="lazy" /> : <span>{venue || t.types[type]}</span>}
@@ -67,6 +74,8 @@ const years = [...new Set(papers.map((paper) => paper.data.year))];
     }
   </ol>
 
+  <p class="pubs-empty" data-pub-empty hidden>{t.noResults}</p>
+
   <div class="pubs-more">
     <button type="button" class="pill-button" data-pub-more hidden>
       {t.showMore}
@@ -78,25 +87,41 @@ const years = [...new Set(papers.map((paper) => paper.data.year))];
 <script>
   const PAGE_SIZE = 4;
 
-  const dropdown = document.querySelector<HTMLElement>('[data-pub-filter]');
   const count = document.querySelector<HTMLElement>('[data-pub-count]');
   const more = document.querySelector<HTMLButtonElement>('[data-pub-more]');
+  const empty = document.querySelector<HTMLElement>('[data-pub-empty]');
   const items = [...document.querySelectorAll<HTMLElement>('.pub')];
 
-  // Shared list state: the date filter picks the matching papers,
-  // and only the first PAGE_SIZE are shown until "Show more" is clicked
-  let year = '';
+  // Shared list state: every filter must match (an empty value means "all"),
+  // and only the first PAGE_SIZE matches are shown until "Show more" is clicked
+  // Start from each dropdown's initially selected option
+  const filters: Record<string, string> = {};
+  document.querySelectorAll<HTMLElement>('#publications [data-dropdown]').forEach((dropdown) => {
+    const selected = dropdown.querySelector<HTMLElement>('[role=option][aria-selected=true]');
+    filters[dropdown.dataset.dropdown!] = selected?.dataset.value ?? '';
+  });
   let expanded = false;
 
   const render = () => {
-    const matching = items.filter((item) => !year || item.dataset.year === year);
+    const matching = items.filter((item) =>
+      Object.entries(filters).every(([name, value]) => !value || item.dataset[name] === value),
+    );
     items.forEach((item) => {
       const index = matching.indexOf(item);
       item.hidden = index === -1 || (!expanded && index >= PAGE_SIZE);
     });
     if (count) count.textContent = String(matching.length);
+    if (empty) empty.hidden = matching.length > 0;
     if (more) more.hidden = expanded || matching.length <= PAGE_SIZE;
   };
+
+  document.querySelector('#publications')?.addEventListener('dropdown-change', (event) => {
+    const { name, value } = (event as CustomEvent<{ name: string; value: string }>).detail;
+    if (!(name in filters)) return;
+    filters[name] = value;
+    expanded = false;
+    render();
+  });
 
   more?.addEventListener('click', () => {
     expanded = true;
@@ -104,69 +129,4 @@ const years = [...new Set(papers.map((paper) => paper.data.year))];
   });
 
   render();
-
-  if (dropdown) {
-    const trigger = dropdown.querySelector<HTMLButtonElement>('.dropdown-trigger')!;
-    const label = dropdown.querySelector<HTMLElement>('[data-dropdown-label]')!;
-    const menu = dropdown.querySelector<HTMLElement>('[role=listbox]')!;
-    const options = [...menu.querySelectorAll<HTMLElement>('[role=option]')];
-    let active = 0;
-
-    const setActive = (index: number) => {
-      active = (index + options.length) % options.length;
-      options.forEach((option, i) => option.classList.toggle('is-active', i === active));
-      menu.setAttribute('aria-activedescendant', options[active].id);
-    };
-
-    const open = () => {
-      menu.hidden = false;
-      trigger.setAttribute('aria-expanded', 'true');
-      setActive(options.findIndex((option) => option.getAttribute('aria-selected') === 'true'));
-      menu.focus();
-    };
-
-    const close = (refocus = true) => {
-      menu.hidden = true;
-      trigger.setAttribute('aria-expanded', 'false');
-      if (refocus) trigger.focus();
-    };
-
-    const select = (option: HTMLElement) => {
-      options.forEach((o) => o.setAttribute('aria-selected', String(o === option)));
-      label.textContent = option.textContent;
-      year = option.dataset.value ?? '';
-      expanded = false;
-      render();
-      close();
-    };
-
-    trigger.addEventListener('click', () => (menu.hidden ? open() : close()));
-    trigger.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-        event.preventDefault();
-        open();
-      }
-    });
-
-    options.forEach((option, i) => {
-      option.addEventListener('click', () => select(option));
-      option.addEventListener('mousemove', () => setActive(i));
-    });
-
-    menu.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowDown') setActive(active + 1);
-      else if (event.key === 'ArrowUp') setActive(active - 1);
-      else if (event.key === 'Home') setActive(0);
-      else if (event.key === 'End') setActive(options.length - 1);
-      else if (event.key === 'Enter' || event.key === ' ') select(options[active]);
-      else if (event.key === 'Escape') close();
-      else if (event.key === 'Tab') return close(false);
-      else return;
-      event.preventDefault();
-    });
-
-    document.addEventListener('click', (event) => {
-      if (!menu.hidden && !dropdown.contains(event.target as Node)) close(false);
-    });
-  }
 </script>
