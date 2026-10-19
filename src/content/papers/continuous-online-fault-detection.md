@@ -14,6 +14,7 @@ summary:
   en: "An online approach to fault detection for mobile robots, where lightweight models running on the robot keep adapting to new operating conditions over time."
   fr: "Une approche de détection de fautes en ligne pour les robots mobiles, où des modèles légers embarqués sur le robot s’adaptent en continu aux nouvelles conditions d’utilisation."
 url: "https://arxiv.org/abs/2609.29194"
+image: "/papers/continuous-online-fault-detection.webp"
 ---
 
 ## Abstract
