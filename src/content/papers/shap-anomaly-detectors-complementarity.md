@@ -17,6 +17,9 @@ summary:
   fr: "Utilise les contributions SHAP pour comparer la façon dont différents algorithmes de détection d’anomalies prennent leurs décisions, et identifier les détecteurs complémentaires."
 url: "https://arxiv.org/abs/2602.00208"
 image: "/papers/shap-anomaly-detectors-complementarity.webp"
+award:
+  en: "Best Paper Award"
+  fr: "Prix du meilleur article"
 ---
 
 ## Abstract

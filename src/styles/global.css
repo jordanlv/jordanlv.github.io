@@ -327,6 +327,7 @@ h1 {
 .pubs-more:has(> [hidden]) { display: none; }
 
 .pub-thumb {
+  position: relative; /* anchors the award badge */
   text-decoration: none;
   transition: border-color 0.2s;
   aspect-ratio: 16 / 9; /* same ratio as the paper page figure: one 1440×810 image per paper */
@@ -339,7 +340,7 @@ h1 {
   padding: 12px;
 }
 .pub-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.pub-thumb span {
+.pub-thumb .thumb-label {
   font-family: var(--mono);
   font-size: 11px;
   color: var(--muted);
@@ -415,6 +416,31 @@ h1 {
   }
 }
 
+/* ---------- Award badge (over a paper's image) ---------- */
+.award-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px 5px 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+/* Optical centring, measured: Red Hat Display sits a little low in its line box and the
+   trophy's ink is not centred in its viewBox */
+.award-badge svg { flex-shrink: 0; transform: translateY(-0.5px); }
+.paper-figure .award-badge { top: 16px; left: 16px; padding: 6.5px 14px 7.5px 11px; font-size: 13px; gap: 6px; }
+.paper-figure .award-badge svg { transform: none; }
+
 /* ---------- Buttons ---------- */
 .button {
   display: inline-flex;
@@ -466,6 +492,7 @@ h1 {
 .paper-actions .pill-button span[hidden] { display: none; }
 
 .paper-figure {
+  position: relative; /* anchors the award badge */
   margin: 40px 0 0;
   aspect-ratio: 16 / 9;
   border-radius: var(--radius);
@@ -476,7 +503,7 @@ h1 {
   place-items: center;
 }
 .paper-figure img { width: 100%; height: 100%; object-fit: cover; }
-.paper-figure span { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.paper-figure .thumb-label { font-family: var(--mono); font-size: 12px; color: var(--muted); }
 
 /* Article body written in Markdown */
 .prose { margin-top: 40px; font-size: 16px; line-height: 1.7; color: var(--soft); }

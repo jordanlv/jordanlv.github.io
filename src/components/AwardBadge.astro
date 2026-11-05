@@ -1,0 +1,15 @@
+---
+// Pill laid over a paper's image (list thumbnail and paper page figure)
+import Icon from './Icon.astro';
+
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<span class="award-badge">
+  <Icon name="trophy" size={13} />
+  {label}
+</span>

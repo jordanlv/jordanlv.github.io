@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
 import Icon from './Icon.astro';
+import AwardBadge from './AwardBadge.astro';
 import PaperMeta from './PaperMeta.astro';
 import PaperAuthors from './PaperAuthors.astro';
 import profile from '../data/profile.json';
@@ -17,7 +18,7 @@ interface Props {
 
 const { paper, lang } = Astro.props;
 const t = ui[lang];
-const { title, authors, venue, venueFull, type, summary, image, url, keywords } = paper.data;
+const { title, authors, venue, venueFull, type, summary, image, url, keywords, award } = paper.data;
 const { Content } = await render(paper);
 const hasContent = Boolean(paper.body?.trim());
 const bibtex = toBibtex(paper);
@@ -61,7 +62,8 @@ const bibtex = toBibtex(paper);
     </header>
 
     <figure class="paper-figure">
-      {image ? <img src={image} alt="" /> : <span>{venue || t.types[type]}</span>}
+      {image ? <img src={image} alt="" /> : <span class="thumb-label">{venue || t.types[type]}</span>}
+      {award && <AwardBadge label={award[lang]} />}
     </figure>
 
     {/* The article body is written in the paper's own language */}
