@@ -421,10 +421,7 @@ h1 {
   position: absolute;
   top: 8px;
   left: 8px;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 10px 5px 8px;
+  padding: 5px 10px;
   border-radius: 999px;
   background: var(--accent);
   color: var(--accent-text);
@@ -435,11 +432,8 @@ h1 {
   white-space: nowrap;
   box-shadow: 0 2px 8px var(--shadow);
 }
-/* Optical centring, measured: Red Hat Display sits a little low in its line box and the
-   trophy's ink is not centred in its viewBox */
-.award-badge svg { flex-shrink: 0; transform: translateY(-0.5px); }
-.paper-figure .award-badge { top: 16px; left: 16px; padding: 6.5px 14px 7.5px 11px; font-size: 13px; gap: 6px; }
-.paper-figure .award-badge svg { transform: none; }
+/* Uneven vertical padding: Red Hat Display sits a little low in its line box (measured) */
+.paper-figure .award-badge { top: 16px; left: 16px; padding: 6.5px 14px 7.5px; font-size: 13px; }
 
 /* ---------- Buttons ---------- */
 .button {
