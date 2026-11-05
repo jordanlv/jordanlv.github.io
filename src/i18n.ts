@@ -1,3 +1,5 @@
+// The site is published in English only; the French strings are kept in case a French version comes back.
+// `Lang` is also the language a paper is written in (used by the publication filter).
 export const languages = ['en', 'fr'] as const;
 export type Lang = (typeof languages)[number];
 
@@ -21,7 +23,6 @@ export const ui = {
     noResults: 'No publication matches these filters.',
     showMore: 'Show more publications',
     toggleTheme: 'Toggle dark mode',
-    switchLanguage: 'Voir le site en français',
     types: { Preprint: 'Preprint', Conference: 'Conference', Workshop: 'Workshop', Paper: 'Paper' },
     // Paper pages
     allPublications: 'All publications',
@@ -45,7 +46,6 @@ export const ui = {
     noResults: 'Aucune publication ne correspond à ces filtres.',
     showMore: 'Voir plus de publications',
     toggleTheme: 'Activer ou désactiver le mode sombre',
-    switchLanguage: 'View the site in English',
     types: { Preprint: 'Prépublication', Conference: 'Conférence', Workshop: 'Atelier', Paper: 'Article' },
     // Paper pages
     allPublications: 'Toutes les publications',
@@ -61,4 +61,3 @@ export const ui = {
 /** Each language's name, written in that language (used in the language filter) */
 export const languageNames: Record<Lang, string> = { en: 'English', fr: 'Français' };
 
-export const otherLang = (lang: Lang): Lang => (lang === 'en' ? 'fr' : 'en');

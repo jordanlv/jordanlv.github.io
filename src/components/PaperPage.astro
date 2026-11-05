@@ -8,8 +8,8 @@ import AwardBadge from './AwardBadge.astro';
 import PaperMeta from './PaperMeta.astro';
 import PaperAuthors from './PaperAuthors.astro';
 import profile from '../data/profile.json';
-import { homePath, otherLang, ui, type Lang } from '../i18n';
-import { paperPath, sourceName, toBibtex, type Paper } from '../lib/papers';
+import { homePath, ui, type Lang } from '../i18n';
+import { sourceName, toBibtex, type Paper } from '../lib/papers';
 
 interface Props {
   paper: Paper;
@@ -28,9 +28,8 @@ const bibtex = toBibtex(paper);
   lang={lang}
   title={`${title} — ${profile.name}`}
   description={summary[lang]}
-  alternates={{ en: paperPath('en', paper.id), fr: paperPath('fr', paper.id) }}
 >
-  <Header lang={lang} alternateHref={paperPath(otherLang(lang), paper.id)} />
+  <Header lang={lang} />
   <div class="pattern pattern-hero" aria-hidden="true"></div>
 
   <main class="container paper">

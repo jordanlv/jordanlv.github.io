@@ -1,20 +1,16 @@
 ---
 import Icon from './Icon.astro';
 import profile from '../data/profile.json';
-import { homePath, otherLang, ui, type Lang } from '../i18n';
+import { homePath, ui, type Lang } from '../i18n';
 
 interface Props {
   lang: Lang;
-  /** Same page in the other language (defaults to the other home page) */
-  alternateHref?: string;
   /** Home page: links are in-page anchors and the logo waits for the hero name to dock */
   isHome?: boolean;
 }
 
 const { lang, isHome = false } = Astro.props;
 const t = ui[lang];
-const switchTo = otherLang(lang);
-const alternateHref = Astro.props.alternateHref ?? homePath[switchTo];
 const home = isHome ? '' : homePath[lang];
 
 const [firstName, ...rest] = profile.name.split(' ');
@@ -27,9 +23,6 @@ const lastName = rest.join(' ');
     <a href={isHome ? '#top' : home} class:list={['logo', { 'is-visible': !isHome }]}>{firstName} <span class="muted">{lastName}</span></a>
     <nav class="nav">
       <a href={`${home}#publications`}>{t.publications}</a>
-      <a class="icon-button lang-toggle" href={alternateHref} hreflang={switchTo} lang={switchTo} aria-label={t.switchLanguage}>
-        {switchTo === 'fr' ? 'FR' : 'EN'}
-      </a>
       <button class="icon-button theme-toggle" type="button" aria-label={t.toggleTheme}>
         <span class="icon-sun"><Icon name="sun" size={16} /></span>
         <span class="icon-moon"><Icon name="moon" size={16} /></span>
