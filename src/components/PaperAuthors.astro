@@ -4,16 +4,25 @@ import { SELF } from '../lib/papers';
 interface Props {
   authors: string[];
   class?: string;
+  /** Long lists stop after Jordan's name and end with "+N" (used in the publication list) */
+  compact?: boolean;
 }
 
-const { authors, class: className = 'pub-authors' } = Astro.props;
+// Lists longer than this are shortened in compact mode
+const COMPACT_MAX = 6;
+
+const { authors, class: className = 'pub-authors', compact = false } = Astro.props;
+const selfIndex = authors.indexOf(SELF);
+const cut = compact && authors.length > COMPACT_MAX && selfIndex !== -1 ? selfIndex + 1 : authors.length;
+const shown = authors.slice(0, cut);
+const hidden = authors.slice(cut);
 ---
 
 <p class={className}>
-  {authors.map((author, i) => (
+  {shown.map((author, i) => (
     <>
       {author === SELF ? <strong>{author}</strong> : author}
-      {i < authors.length - 1 && ', '}
+      {i < shown.length - 1 && ', '}
     </>
-  ))}
+  ))}{/* kept on the same line: a line break here would add a space before the comma */}{hidden.length > 0 && <span title={hidden.join(', ')}>, +{hidden.length}</span>}
 </p>

@@ -26,8 +26,11 @@ export function sourceName(url: string): string {
 /** BibTeX entry built from the paper's metadata */
 export function toBibtex(paper: Paper): string {
   const { title, authors, venue, venueFull, year, type, url } = paper.data;
+  // Key convention: first author's surname + year + first meaningful word of the title
+  const slugify = (s: string) => s.toLowerCase().normalize('NFD').replace(/[^a-z0-9]/g, '');
+  const surname = authors[0]?.split(' ').at(-1) ?? 'paper';
   const firstWord = title.split(/[^\p{L}\p{N}]+/u).find((w) => w.length > 3) ?? 'paper';
-  const key = `levy${year}${firstWord.toLowerCase().normalize('NFD').replace(/[^a-z0-9]/g, '')}`;
+  const key = `${slugify(surname)}${year}${slugify(firstWord)}`;
   const entryType = type === 'Conference' || type === 'Workshop' ? 'inproceedings' : 'misc';
   const fields: [string, string | number | undefined][] = [
     ['title', `{${title}}`],

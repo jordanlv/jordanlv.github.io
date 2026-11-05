@@ -67,7 +67,7 @@ const paperLangs = languages.filter((l) => papers.some((paper) => paper.data.lan
               <h3 class="pub-title">
                 <a href={href}>{title}</a>
               </h3>
-              <PaperAuthors authors={authors} />
+              <PaperAuthors authors={authors} compact />
               <p class="pub-summary">{paper.data.summary[lang]}</p>
             </div>
           </li>
