@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Hero from './Hero.astro';
+import Projects from './Projects.astro';
 import Publications from './Publications.astro';
 import Footer from './Footer.astro';
 import profile from '../data/profile.json';
@@ -19,6 +20,8 @@ const { lang } = Astro.props;
   <div class="pattern pattern-hero" aria-hidden="true"></div>
   <main>
     <Hero lang={lang} />
+    <div class="container"><hr class="divider" /></div>
+    <Projects lang={lang} />
     <div class="container"><hr class="divider" /></div>
     <Publications lang={lang} />
   </main>

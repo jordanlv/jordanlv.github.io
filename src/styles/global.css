@@ -103,9 +103,26 @@ p { margin: 0; }
 /* The hero name animates into this spot on scroll; the logo only shows once it has docked */
 .js .logo:not(.is-visible) { opacity: 0; pointer-events: none; }
 
-.nav { display: flex; align-items: center; gap: 22px; font-family: var(--mono); font-size: 13px; }
+.nav { display: flex; align-items: center; gap: 20px; font-family: var(--mono); font-size: 13px; }
 .nav a:not(.icon-button) { text-decoration: none; color: var(--soft); transition: color 0.2s; }
 .nav a:not(.icon-button):hover { color: var(--text); }
+
+.nav-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text) !important;
+  font-weight: 500;
+  transition: border-color 0.2s, background-color 0.2s !important;
+}
+.nav-cv:hover {
+  border-color: var(--muted);
+  background: var(--thumb);
+}
 
 /* Round header button: theme toggle */
 .icon-button {
@@ -164,7 +181,62 @@ h1 {
 
 .role { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-bottom: 16px; }
 
+/* Hero Award Banner */
+.hero-award {
+  margin-bottom: 16px;
+}
+.hero-award-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: none;
+  box-shadow: 0 2px 8px var(--shadow);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.hero-award-link:hover {
+  border-color: var(--muted);
+  transform: translateY(-1px);
+}
+.hero-award-link .award-icon {
+  display: inline-flex;
+  color: #e5a50a; /* gold trophy accent */
+}
+.hero-award-link .award-text strong {
+  font-weight: 600;
+}
+.hero-award-link svg:last-child {
+  color: var(--muted);
+}
+
 .bio { color: var(--soft); font-size: 16px; line-height: 1.5; max-width: 620px; }
+
+/* Status Badge / Job search */
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--surface) 65%, var(--bg));
+  border: 1px dashed var(--border);
+  font-size: 13px;
+  color: var(--soft);
+}
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  flex-shrink: 0;
+}
 
 .links {
   list-style: none;
@@ -189,6 +261,18 @@ h1 {
   transition: border-color 0.2s, transform 0.2s;
 }
 .links a:hover { border-color: var(--muted); transform: translateY(-1px); }
+.links a.hero-cv-btn {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: var(--accent);
+  font-weight: 600;
+  box-shadow: 0 2px 10px var(--shadow);
+}
+.links a.hero-cv-btn:hover {
+  opacity: 0.9;
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
 /* Each icon's ink sits differently in its box: shift it onto the optical center of the label
    (halfway between cap-height and x-height centers), measured per icon */
 .links a svg { flex-shrink: 0; transform: translateY(var(--icon-shift, 0px)); }
@@ -299,6 +383,151 @@ h1 {
 .dropdown-menu [role='option']:hover,
 .dropdown-menu [role='option'].is-active { background: var(--thumb); color: var(--text); }
 .dropdown-menu [role='option'][aria-selected='true'] { background: var(--accent); color: var(--accent-text); }
+
+/* ---------- Projects & Open Source ---------- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card:hover {
+  border-color: var(--muted);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--shadow);
+}
+
+.project-card.is-featured {
+  grid-column: 1 / -1;
+  background: color-mix(in srgb, var(--surface) 92%, var(--bg));
+  border-color: color-mix(in srgb, var(--border) 60%, var(--muted));
+}
+
+.project-header {
+  margin-bottom: 12px;
+}
+
+.project-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.project-title {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.project-card.is-featured .project-title {
+  font-size: 19px;
+}
+
+.project-title a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+}
+
+.project-title a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.project-title svg {
+  color: var(--muted);
+  transition: transform 0.2s;
+}
+
+.project-card:hover .project-title svg {
+  transform: translate(1px, -1px);
+}
+
+.project-badge {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--thumb);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.project-badge.award-badge-inline {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.project-desc {
+  font-size: 14.5px;
+  color: var(--soft);
+  line-height: 1.5;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.project-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--soft);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.project-link:hover {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.project-link svg {
+  color: var(--muted);
+}
 
 /* ---------- Publications ---------- */
 .pubs { list-style: none; margin: 0; padding: 0; }
@@ -549,6 +778,7 @@ h1 {
   .nav { gap: 14px; }
   .hero { padding-top: 24px; padding-bottom: 64px; }
   .pub { grid-template-columns: 1fr; gap: 16px; }
+  .projects-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

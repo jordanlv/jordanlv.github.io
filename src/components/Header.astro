@@ -22,7 +22,12 @@ const lastName = rest.join(' ');
     <!-- On the home page it stays hidden at the top: the hero name morphs into this spot on scroll (see Hero.astro) -->
     <a href={isHome ? '#top' : home} class:list={['logo', { 'is-visible': !isHome }]}>{firstName} <span class="muted">{lastName}</span></a>
     <nav class="nav">
+      <a href={`${home}#projects`}>{t.projects}</a>
       <a href={`${home}#publications`}>{t.publications}</a>
+      <a href="/cv.pdf" target="_blank" rel="noopener" class="nav-cv">
+        <Icon name="file" size={13} />
+        <span>{t.resume}</span>
+      </a>
       <button class="icon-button theme-toggle" type="button" aria-label={t.toggleTheme}>
         <span class="icon-sun"><Icon name="sun" size={16} /></span>
         <span class="icon-moon"><Icon name="moon" size={16} /></span>

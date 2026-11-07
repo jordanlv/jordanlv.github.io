@@ -3,15 +3,25 @@
   "initials": "JL",
   "photo": "/photo.webp",
   "role": {
-    "en": "PhD Candidate at IRIT · Research Engineer at TwinswHeel",
-    "fr": "Doctorant à l'IRIT · Ingénieur de recherche chez TwinswHeel"
+    "en": "Applied Scientist & PhD Candidate · Time-Series & Foundation Models",
+    "fr": "Applied Scientist & Doctorant · Time-Series & Modèles de Fondation"
+  },
+  "award": {
+    "label": "Best Paper Award",
+    "venue": "IDA 2026",
+    "url": "/papers/shap-anomaly-detectors-complementarity/"
+  },
+  "status": {
+    "en": "Graduating in early 2027 — actively seeking Applied Scientist / Research Engineer roles.",
+    "fr": "Diplômé début 2027 — en recherche active de postes d'Applied Scientist / Research Engineer."
   },
   "location": "Toulouse, France",
   "bio": {
-    "en": "I work on explainable anomaly detection for autonomous service robots. My research combines time series analysis, ensemble and multi-agent learning, and explainability methods such as SHAP to detect faults early and understand why they happen.",
-    "fr": "Je travaille sur la détection d'anomalies explicable pour les robots de service autonomes. Mes recherches combinent l'analyse de séries temporelles, l'apprentissage ensembliste et multi-agents, et des méthodes d'explicabilité comme SHAP pour détecter les fautes au plus tôt et comprendre pourquoi elles surviennent."
+    "en": "I work on time-series foundation models (TSPulse), edge AI, and explainability for autonomous systems at IRIT (Université Toulouse Capitole) and TwinswHeel. My research focuses on adapting and distilling deep foundation models into lightweight, adaptive architectures for low-latency onboard anomaly detection.",
+    "fr": "Je travaille sur les modèles de fondation temporels (TSPulse), l'Edge AI et l'explicabilité pour les systèmes autonomes à l'IRIT (Université Toulouse Capitole) et chez TwinswHeel. Mes recherches portent sur l'adaptation et la distillation de modèles de fondation en architectures légères et adaptatives pour la détection d'anomalies embarquée à basse latence."
   },
   "email": "jordan.levy@irit.fr",
+  "cv": "/cv.pdf",
   "links": [
     { "label": "Google Scholar", "icon": "scholar", "url": "https://scholar.google.com/citations?user=TgsC2w4AAAAJ" },
     { "label": "GitHub", "icon": "github", "url": "https://github.com/jordanlv" },
@@ -20,16 +30,16 @@
   ],
   "research": [
     {
-      "title": "Anomaly detection",
-      "description": "Detecting faults on mobile robots from multivariate sensor streams, online and on the edge."
+      "title": "Foundation Models & Edge AI",
+      "description": "Distilling and adapting deep time-series foundation models (TSPulse) for real-time edge anomaly detection."
     },
     {
-      "title": "Explainability",
-      "description": "Using SHAP contributions to understand what anomaly detectors see and how they complement each other."
+      "title": "Explainability (XAI)",
+      "description": "Using SHAP contributions to analyze detector complementarity and ensure reliable decisions under domain shifts."
     },
     {
-      "title": "Time series",
-      "description": "Interactive and multi-agent ensemble learning for time series classification."
+      "title": "Time Series & Multi-Agents",
+      "description": "Interactive and multi-agent ensemble learning for multivariate time series classification and fault detection."
     }
   ]
 }
