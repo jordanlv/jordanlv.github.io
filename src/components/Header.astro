@@ -22,8 +22,22 @@ const lastName = rest.join(' ');
     <!-- On the home page it stays hidden at the top: the hero name morphs into this spot on scroll (see Hero.astro) -->
     <a href={isHome ? '#top' : home} class:list={['logo', { 'is-visible': !isHome }]}>{firstName} <span class="muted">{lastName}</span></a>
     <nav class="nav">
-      <a href={`${home}#publications`}>{t.publications}</a>
-      <a href={`${home}#projects`}>{t.projectsNav}</a>
+      <div class="nav-links">
+        <a href={`${home}#publications`}>{t.publications}</a>
+        <a href={`${home}#experience`}>{t.experience}</a>
+        <a href={`${home}#projects`}>{t.projectsNav}</a>
+      </div>
+      <div class="nav-menu-wrap" data-nav-menu>
+        <button class="icon-button nav-menu-toggle" type="button" aria-label={t.menu} aria-expanded="false">
+          <span class="icon-menu-open"><Icon name="menu" size={16} /></span>
+          <span class="icon-menu-close"><Icon name="close" size={16} /></span>
+        </button>
+        <div class="dropdown-menu nav-dropdown" hidden>
+          <a href={`${home}#publications`}>{t.publications}</a>
+          <a href={`${home}#experience`}>{t.experience}</a>
+          <a href={`${home}#projects`}>{t.projectsNav}</a>
+        </div>
+      </div>
       <a href="/cv.pdf" target="_blank" rel="noopener" class="nav-cv" aria-label={t.resume} title={t.resume}>
         <Icon name="file" size={16} />
         <span class="nav-cv-label">{t.resume}</span>
@@ -38,9 +52,42 @@ const lastName = rest.join(' ');
 
 <script>
   const header = document.querySelector<HTMLElement>('.header');
-  const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 0);
+  const menuWrap = document.querySelector<HTMLElement>('[data-nav-menu]');
+  const menuToggle = menuWrap?.querySelector<HTMLButtonElement>('.nav-menu-toggle');
+  const menuDropdown = menuWrap?.querySelector<HTMLElement>('.nav-dropdown');
+
+  const closeMenu = () => {
+    if (!menuToggle || !menuDropdown) return;
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuDropdown.hidden = true;
+  };
+
+  const updateHeader = () => {
+    const scrolled = window.scrollY > 0;
+    header?.classList.toggle('is-scrolled', scrolled);
+    if (!scrolled) closeMenu();
+  };
   window.addEventListener('scroll', updateHeader, { passive: true });
   updateHeader();
+
+  menuToggle?.addEventListener('click', () => {
+    if (!menuDropdown) return;
+    const open = menuDropdown.hidden;
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuDropdown.hidden = !open;
+  });
+
+  menuDropdown?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('click', (event) => {
+    if (menuWrap && !menuWrap.contains(event.target as Node)) closeMenu();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
 
   const button = document.querySelector<HTMLButtonElement>('.theme-toggle');
   button?.addEventListener('click', () => {

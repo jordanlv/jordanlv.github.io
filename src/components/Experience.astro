@@ -1,0 +1,122 @@
+---
+import experience from '../data/experience.json';
+import { ui, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<section class="section container" id="experience">
+  <div class="section-head">
+    <h2 class="section-title">{t.experience}</h2>
+
+    <div class="tabs" role="tablist" aria-label={t.experience} data-exp-tabs>
+      <button
+        type="button"
+        class="tab-button"
+        role="tab"
+        id="tab-work"
+        aria-selected="true"
+        aria-controls="panel-work"
+        data-tab="work"
+      >
+        {t.workTab}
+      </button>
+      <button
+        type="button"
+        class="tab-button"
+        role="tab"
+        id="tab-education"
+        aria-selected="false"
+        aria-controls="panel-education"
+        tabindex="-1"
+        data-tab="education"
+      >
+        {t.educationTab}
+      </button>
+    </div>
+  </div>
+
+  <div id="panel-work" role="tabpanel" aria-labelledby="tab-work" data-panel="work">
+    <ol class="timeline">
+      {
+        experience.work.map((item) => (
+          <li class:list={['timeline-item', { 'is-current': item.current }]}>
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <p class="timeline-meta">
+              <span>{item.period[lang]}</span>
+              <span aria-hidden="true">·</span>
+              <span>{item.location}</span>
+            </p>
+            <h3 class="timeline-title">{item.role[lang]}</h3>
+            <p class="timeline-org">{item.organization[lang]}</p>
+            <p class="timeline-desc">{item.summary[lang]}</p>
+            {item.tags.length > 0 && (
+              <ul class="timeline-tags">
+                {item.tags.map((tag) => (
+                  <li class="tag">{tag}</li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+
+  <div id="panel-education" role="tabpanel" aria-labelledby="tab-education" data-panel="education" hidden>
+    <ol class="timeline">
+      {
+        experience.education.map((item) => (
+          <li class:list={['timeline-item', { 'is-current': item.current }]}>
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <p class="timeline-meta">
+              <span>{item.period[lang]}</span>
+              <span aria-hidden="true">·</span>
+              <span>{item.location}</span>
+            </p>
+            <h3 class="timeline-title">{item.degree[lang]}</h3>
+            <p class="timeline-org">{item.institution[lang]}</p>
+            {item.detail && <p class="timeline-desc">{item.detail[lang]}</p>}
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<script>
+  const tablist = document.querySelector<HTMLElement>('[data-exp-tabs]');
+  const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-exp-tabs] [role="tab"]')];
+  const panels = [...document.querySelectorAll<HTMLElement>('#experience [role="tabpanel"]')];
+
+  const activate = (nextTab: HTMLButtonElement, focus = false) => {
+    const target = nextTab.dataset.tab;
+    tabs.forEach((tab) => {
+      const selected = tab === nextTab;
+      tab.setAttribute('aria-selected', String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+    });
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.panel !== target;
+    });
+    if (focus) nextTab.focus();
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => activate(tab));
+  });
+
+  tablist?.addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    const index = tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
+    const delta = event.key === 'ArrowRight' ? 1 : -1;
+    const next = tabs[(index + delta + tabs.length) % tabs.length];
+    if (next) activate(next, true);
+  });
+</script>

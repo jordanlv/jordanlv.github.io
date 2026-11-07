@@ -110,9 +110,26 @@ p { margin: 0; }
 /* The hero name animates into this spot on scroll; the logo only shows once it has docked */
 .js .logo:not(.is-visible) { opacity: 0; pointer-events: none; }
 
-.nav { display: flex; align-items: center; gap: 18px; font-family: var(--mono); font-size: 13px; }
+.nav { display: flex; align-items: center; gap: 16px; font-family: var(--mono); font-size: 13px; }
+.nav-links { display: flex; align-items: center; gap: inherit; }
 .nav a:not(.icon-button) { text-decoration: none; color: var(--soft); transition: color 0.2s; }
 .nav a:not(.icon-button):hover { color: var(--text); }
+
+.nav-menu-wrap { position: relative; display: none; }
+.nav-menu-toggle span { display: grid; }
+.nav-menu-toggle[aria-expanded='true'] .icon-menu-open,
+.nav-menu-toggle:not([aria-expanded='true']) .icon-menu-close { display: none; }
+.nav-dropdown { top: calc(100% + 8px); min-width: 160px; z-index: 20; }
+.nav-dropdown a {
+  display: block;
+  padding: 9px 14px;
+  border-radius: 10px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.nav-dropdown a:hover { background: var(--thumb); color: var(--text); }
 
 .nav-cv {
   display: inline-flex;
@@ -370,6 +387,118 @@ h1 {
 .dropdown-menu [role='option']:hover,
 .dropdown-menu [role='option'].is-active { background: var(--thumb); color: var(--text); }
 .dropdown-menu [role='option'][aria-selected='true'] { background: var(--accent); color: var(--accent-text); }
+
+/* ---------- Experience (Tabs & Timeline) ---------- */
+.tabs {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.tab-button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.tab-button:hover { color: var(--text); }
+.tab-button:focus-visible { outline: 2px solid var(--muted); outline-offset: 2px; }
+.tab-button[aria-selected='true'] {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.timeline {
+  position: relative;
+  list-style: none;
+  margin: 28px 0 4px;
+  padding: 0 0 0 28px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--border);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 32px;
+}
+.timeline-item:last-child {
+  padding-bottom: 4px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -28px;
+  top: 3.5px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--faint);
+  box-shadow: 0 0 0 4px var(--bg);
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+.timeline-item.is-current .timeline-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.timeline-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.timeline-org {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.timeline-desc {
+  font-size: 15px;
+  color: var(--soft);
+  line-height: 1.55;
+  margin-top: 10px;
+}
+
+.timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
 
 /* ---------- Personal projects ---------- */
 .projects-grid {
@@ -741,6 +870,11 @@ h1 {
 }
 
 /* ---------- Responsive ---------- */
+@media (max-width: 700px) {
+  .header:has(.logo.is-visible) .nav-cv { padding: 0 8px; }
+  .header:has(.logo.is-visible) .nav-cv .nav-cv-label { max-width: 0; margin-left: 0; opacity: 0; }
+}
+
 @media (max-width: 640px) {
   :root { --pad: 24px; }
   /* Narrow screens only show part of the hero pattern: use its sparser left side */
@@ -748,10 +882,12 @@ h1 {
   .logo { font-size: 16px; }
   .nav { gap: 10px; font-size: 12px; }
   .icon-button { width: 30px; height: 30px; }
-  .nav-cv { height: 30px; min-width: 30px; padding: 0 10px; }
-  .header.is-scrolled .nav-cv,
-  .header:has(.logo.is-visible) .nav-cv { padding: 0 6px; }
-  .header:has(.logo.is-visible) .nav-cv .nav-cv-label { max-width: 0; margin-left: 0; opacity: 0; }
+  .nav-cv { height: 30px; min-width: 30px; padding: 0 6px; }
+  .nav-cv .nav-cv-label { max-width: 0; margin-left: 0; opacity: 0; }
+  .header.is-scrolled .nav-links,
+  .header:has(.logo.is-visible) .nav-links { display: none; }
+  .header.is-scrolled .nav-menu-wrap,
+  .header:has(.logo.is-visible) .nav-menu-wrap { display: block; }
   .hero { padding-top: 24px; padding-bottom: 64px; }
   .pub { grid-template-columns: 1fr; gap: 16px; }
 }

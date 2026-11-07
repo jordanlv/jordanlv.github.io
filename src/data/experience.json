@@ -1,0 +1,149 @@
+{
+  "work": [
+    {
+      "role": {
+        "en": "Applied Scientist & PhD Candidate (CIFRE)",
+        "fr": "Applied Scientist & Doctorant (CIFRE)"
+      },
+      "organization": {
+        "en": "TwinswHeel · IRIT (Université Toulouse Capitole)",
+        "fr": "TwinswHeel · IRIT (Université Toulouse Capitole)"
+      },
+      "location": "Toulouse, France",
+      "period": {
+        "en": "Feb 2024 – Mar 2027",
+        "fr": "Fév. 2024 – Mars 2027"
+      },
+      "current": true,
+      "summary": {
+        "en": "Designing and deploying time-series anomaly detection architectures for autonomous mobile robot fleets. Distilling deep time-series foundation models (TSPulse) into lightweight, adaptive edge models for low-latency onboard inference, and combining surrogate modeling with SHAP explainability to analyze detector complementarity under real-world domain shifts.",
+        "fr": "Conception et déploiement d'architectures de détection d'anomalies sur séries temporelles pour des flottes de robots mobiles autonomes. Distillation de modèles de fondation temporels (TSPulse) en modèles embarqués légers et adaptatifs à basse latence, et analyse de la complémentarité des détecteurs via modélisation de substitution et SHAP."
+      },
+      "tags": ["Time-Series Foundation Models", "Anomaly Detection", "Distillation", "Edge AI", "XAI"]
+    },
+    {
+      "role": {
+        "en": "Research Intern — Trajectory Prediction",
+        "fr": "Stagiaire Recherche — Prédiction de trajectoires"
+      },
+      "organization": {
+        "en": "Continental Digital Services France",
+        "fr": "Continental Digital Services France"
+      },
+      "location": "France",
+      "period": {
+        "en": "Mar 2023 – Aug 2023",
+        "fr": "Mars 2023 – Août 2023"
+      },
+      "current": false,
+      "summary": {
+        "en": "Designed and implemented spatio-temporal deep learning models (MLP, LSTM, and a custom VectorNet architecture) leveraging GNSS data and HD Maps context to predict autonomous vehicle trajectories at complex intersections. Built and deployed an optimized real-time prediction pipeline on embedded hardware.",
+        "fr": "Conception et implémentation d'architectures deep learning spatio-temporelles (MLP, LSTM et implémentation sur mesure de VectorNet) exploitant les données GNSS et les cartes HD pour prédire les trajectoires de véhicules autonomes aux intersections complexes, déployées en temps réel sur cible embarquée."
+      },
+      "tags": ["Spatio-Temporal Data", "Trajectory Prediction", "Deep Learning", "PyTorch"]
+    },
+    {
+      "role": {
+        "en": "Research Intern — Opportunistic Software Composition",
+        "fr": "Stagiaire Recherche — Composition logicielle opportuniste"
+      },
+      "organization": {
+        "en": "IRIT (Université de Toulouse)",
+        "fr": "IRIT (Université de Toulouse)"
+      },
+      "location": "Toulouse, France",
+      "period": {
+        "en": "May 2022 – Jul 2022",
+        "fr": "Mai 2022 – Juil. 2022"
+      },
+      "current": false,
+      "summary": {
+        "en": "Tested and enhanced a reinforcement learning-based multi-agent system for dynamic IoT software composition within the SMAC team. Engineered new features for Java/JavaFX simulation tools and established GitLab CI pipelines.",
+        "fr": "Évaluation et amélioration d'un système multi-agents par apprentissage par renforcement pour la composition dynamique de logiciels IoT au sein de l'équipe SMAC. Développement de nouvelles fonctionnalités de simulation Java/JavaFX et mise en place de pipelines CI sur GitLab."
+      },
+      "tags": ["Multi-Agent Systems", "Reinforcement Learning", "IoT", "Java"]
+    }
+  ],
+  "education": [
+    {
+      "degree": {
+        "en": "PhD in Computer Science (Artificial Intelligence)",
+        "fr": "Doctorat en Informatique (Intelligence Artificielle)"
+      },
+      "institution": {
+        "en": "Université Toulouse Capitole · IRIT",
+        "fr": "Université Toulouse Capitole · IRIT"
+      },
+      "location": "Toulouse, France",
+      "period": {
+        "en": "Feb 2024 – Mar 2027",
+        "fr": "Fév. 2024 – Mars 2027"
+      },
+      "current": true,
+      "detail": {
+        "en": "CIFRE industrial PhD with TwinswHeel in the Cooperative Multi-Agents Systems (SMAC) research team, supervised by Benoit Gaudou, Nicolas Verstaevel, and Vincent Talon.",
+        "fr": "Thèse CIFRE avec TwinswHeel au sein de l'équipe Systèmes Multi-Agents Coopératifs (SMAC), encadrée par Benoit Gaudou, Nicolas Verstaevel et Vincent Talon."
+      }
+    },
+    {
+      "degree": {
+        "en": "Engineering Degree in Artificial Intelligence",
+        "fr": "Diplôme d'Ingénieur en Intelligence Artificielle"
+      },
+      "institution": {
+        "en": "Polytech Nantes",
+        "fr": "Polytech Nantes"
+      },
+      "location": "Nantes, France",
+      "period": {
+        "en": "2020 – 2023",
+        "fr": "2020 – 2023"
+      },
+      "current": false,
+      "detail": {
+        "en": "Graduate engineering degree (M.Sc. equivalent) in Computer Science, specializing in Artificial Intelligence and Machine Learning.",
+        "fr": "Formation d'ingénieur en informatique avec spécialisation en intelligence artificielle et apprentissage automatique."
+      }
+    },
+    {
+      "degree": {
+        "en": "University Exchange Program",
+        "fr": "Programme d'échange universitaire"
+      },
+      "institution": {
+        "en": "Kyungpook National University",
+        "fr": "Kyungpook National University"
+      },
+      "location": "Daegu, South Korea",
+      "period": {
+        "en": "2022",
+        "fr": "2022"
+      },
+      "current": false,
+      "detail": {
+        "en": "International exchange semester in Computer Science.",
+        "fr": "Semestre d'échange académique international en informatique."
+      }
+    },
+    {
+      "degree": {
+        "en": "University Diploma in Technology (DUT) in Computer Science",
+        "fr": "DUT Informatique"
+      },
+      "institution": {
+        "en": "IUT Paul Sabatier",
+        "fr": "IUT Paul Sabatier"
+      },
+      "location": "Toulouse, France",
+      "period": {
+        "en": "2018 – 2020",
+        "fr": "2018 – 2020"
+      },
+      "current": false,
+      "detail": {
+        "en": "Two-year university degree in software engineering, algorithms, and computer systems.",
+        "fr": "Formation universitaire et technologique en génie logiciel, algorithmique et systèmes."
+      }
+    }
+  ]
+}

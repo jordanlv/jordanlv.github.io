@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Hero from './Hero.astro';
+import Experience from './Experience.astro';
 import Projects from './Projects.astro';
 import Publications from './Publications.astro';
 import Footer from './Footer.astro';
@@ -22,6 +23,8 @@ const { lang } = Astro.props;
     <Hero lang={lang} />
     <div class="container"><hr class="divider" /></div>
     <Publications lang={lang} />
+    <div class="container"><hr class="divider" /></div>
+    <Experience lang={lang} />
     <div class="container"><hr class="divider" /></div>
     <Projects lang={lang} />
   </main>
