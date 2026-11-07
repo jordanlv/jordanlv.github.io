@@ -18,6 +18,7 @@
   --mono: 'Red Hat Mono', ui-monospace, monospace;
   --radius: 14px;
   --max: 860px;
+  --pad: 56px;
   color-scheme: light;
 }
 
@@ -65,8 +66,8 @@ p { margin: 0; }
   width: 100%;
   max-width: var(--max);
   margin: 0 auto;
-  padding-left: 56px;
-  padding-right: 56px;
+  padding-left: var(--pad);
+  padding-right: var(--pad);
 }
 
 .muted { color: var(--faint); }
@@ -88,40 +89,70 @@ p { margin: 0; }
 }
 
 .header-inner {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   height: 64px;
 }
 
 .logo {
+  position: absolute;
+  left: var(--pad);
+  top: 50%;
+  transform: translateY(-50%);
   font-weight: 600;
   font-size: 18px;
   letter-spacing: -0.025em;
   text-decoration: none;
+  white-space: nowrap;
 }
 /* The hero name animates into this spot on scroll; the logo only shows once it has docked */
 .js .logo:not(.is-visible) { opacity: 0; pointer-events: none; }
 
-.nav { display: flex; align-items: center; gap: 20px; font-family: var(--mono); font-size: 13px; }
+.nav { display: flex; align-items: center; gap: 18px; font-family: var(--mono); font-size: 13px; }
 .nav a:not(.icon-button) { text-decoration: none; color: var(--soft); transition: color 0.2s; }
 .nav a:not(.icon-button):hover { color: var(--text); }
 
 .nav-cv {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 4px 10px;
+  justify-content: center;
+  height: 34px;
+  min-width: 34px;
+  padding: 0 12px;
   border-radius: 999px;
   background: var(--surface);
   border: 1px solid var(--border);
   color: var(--text) !important;
   font-weight: 500;
-  transition: border-color 0.2s, background-color 0.2s !important;
+  flex-shrink: 0;
+  transition: padding 0.25s ease, border-color 0.2s, background-color 0.2s !important;
 }
 .nav-cv:hover {
   border-color: var(--muted);
   background: var(--thumb);
+}
+.nav-cv svg {
+  flex-shrink: 0;
+}
+.nav-cv-label {
+  display: inline-block;
+  max-width: 72px;
+  margin-left: 6px;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 1;
+  transition: max-width 0.25s ease, margin-left 0.25s ease, opacity 0.2s ease;
+}
+
+.header.is-scrolled .nav-cv {
+  padding: 0 8px;
+}
+.header.is-scrolled .nav-cv .nav-cv-label {
+  max-width: 0;
+  margin-left: 0;
+  opacity: 0;
 }
 
 /* Round header button: theme toggle */
@@ -130,6 +161,7 @@ p { margin: 0; }
   place-items: center;
   width: 34px;
   height: 34px;
+  flex-shrink: 0;
   border: 1px solid var(--border);
   border-radius: 50%;
   background: var(--surface);
@@ -711,14 +743,24 @@ h1 {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 640px) {
-  /* Side padding only: a `padding` shorthand here would reset the sections' vertical spacing */
-  .container { padding-left: 32px; padding-right: 32px; }
+  :root { --pad: 24px; }
   /* Narrow screens only show part of the hero pattern: use its sparser left side */
   .pattern-hero { -webkit-mask-position: left top; mask-position: left top; }
-  .logo { white-space: nowrap; }
-  .nav { gap: 12px; font-size: 12px; }
+  .logo { font-size: 16px; }
+  .nav { gap: 10px; font-size: 12px; }
+  .icon-button { width: 30px; height: 30px; }
+  .nav-cv { height: 30px; min-width: 30px; padding: 0 10px; }
+  .header.is-scrolled .nav-cv,
+  .header:has(.logo.is-visible) .nav-cv { padding: 0 6px; }
+  .header:has(.logo.is-visible) .nav-cv .nav-cv-label { max-width: 0; margin-left: 0; opacity: 0; }
   .hero { padding-top: 24px; padding-bottom: 64px; }
   .pub { grid-template-columns: 1fr; gap: 16px; }
+}
+
+@media (max-width: 400px) {
+  :root { --pad: 16px; }
+  .logo { font-size: 15px; }
+  .nav { gap: 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

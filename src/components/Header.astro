@@ -24,9 +24,9 @@ const lastName = rest.join(' ');
     <nav class="nav">
       <a href={`${home}#publications`}>{t.publications}</a>
       <a href={`${home}#projects`}>{t.projectsNav}</a>
-      <a href="/cv.pdf" target="_blank" rel="noopener" class="nav-cv">
-        <Icon name="file" size={13} />
-        <span>{t.resume}</span>
+      <a href="/cv.pdf" target="_blank" rel="noopener" class="nav-cv" aria-label={t.resume} title={t.resume}>
+        <Icon name="file" size={16} />
+        <span class="nav-cv-label">{t.resume}</span>
       </a>
       <button class="icon-button theme-toggle" type="button" aria-label={t.toggleTheme}>
         <span class="icon-sun"><Icon name="sun" size={16} /></span>
