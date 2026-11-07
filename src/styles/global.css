@@ -181,39 +181,6 @@ h1 {
 
 .role { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-bottom: 16px; }
 
-/* Hero Award Banner */
-.hero-award {
-  margin-bottom: 16px;
-}
-.hero-award-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 4px 12px;
-  border-radius: 999px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  font-size: 13px;
-  color: var(--text);
-  text-decoration: none;
-  box-shadow: 0 2px 8px var(--shadow);
-  transition: border-color 0.2s, transform 0.2s;
-}
-.hero-award-link:hover {
-  border-color: var(--muted);
-  transform: translateY(-1px);
-}
-.hero-award-link .award-icon {
-  display: inline-flex;
-  color: #e5a50a; /* gold trophy accent */
-}
-.hero-award-link .award-text strong {
-  font-weight: 600;
-}
-.hero-award-link svg:last-child {
-  color: var(--muted);
-}
-
 .bio { color: var(--soft); font-size: 16px; line-height: 1.5; max-width: 620px; }
 
 /* Status Badge / Job search */
@@ -261,18 +228,6 @@ h1 {
   transition: border-color 0.2s, transform 0.2s;
 }
 .links a:hover { border-color: var(--muted); transform: translateY(-1px); }
-.links a.hero-cv-btn {
-  background: var(--accent);
-  color: var(--accent-text);
-  border-color: var(--accent);
-  font-weight: 600;
-  box-shadow: 0 2px 10px var(--shadow);
-}
-.links a.hero-cv-btn:hover {
-  opacity: 0.9;
-  border-color: var(--accent);
-  transform: translateY(-1px);
-}
 /* Each icon's ink sits differently in its box: shift it onto the optical center of the label
    (halfway between cap-height and x-height centers), measured per icon */
 .links a svg { flex-shrink: 0; transform: translateY(var(--icon-shift, 0px)); }
@@ -384,10 +339,10 @@ h1 {
 .dropdown-menu [role='option'].is-active { background: var(--thumb); color: var(--text); }
 .dropdown-menu [role='option'][aria-selected='true'] { background: var(--accent); color: var(--accent-text); }
 
-/* ---------- Projects & Open Source ---------- */
+/* ---------- Personal projects ---------- */
 .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 16px;
   margin-top: 24px;
 }
@@ -396,7 +351,7 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 22px;
+  padding: 24px;
   border-radius: var(--radius);
   background: var(--surface);
   border: 1px solid var(--border);
@@ -409,14 +364,8 @@ h1 {
   box-shadow: 0 8px 24px var(--shadow);
 }
 
-.project-card.is-featured {
-  grid-column: 1 / -1;
-  background: color-mix(in srgb, var(--surface) 92%, var(--bg));
-  border-color: color-mix(in srgb, var(--border) 60%, var(--muted));
-}
-
 .project-header {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .project-title-row {
@@ -428,13 +377,9 @@ h1 {
 }
 
 .project-title {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.01em;
-}
-
-.project-card.is-featured .project-title {
-  font-size: 19px;
 }
 
 .project-title a {
@@ -470,25 +415,20 @@ h1 {
   white-space: nowrap;
 }
 
-.project-badge.award-badge-inline {
-  background: var(--accent);
-  color: var(--accent-text);
-  border-color: var(--accent);
-  font-weight: 600;
-}
-
 .project-desc {
-  font-size: 14.5px;
+  font-size: 15px;
   color: var(--soft);
-  line-height: 1.5;
+  line-height: 1.55;
   margin-bottom: 20px;
   flex-grow: 1;
 }
 
 .project-footer {
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   padding-top: 14px;
   border-top: 1px solid var(--border);
 }
@@ -775,10 +715,10 @@ h1 {
   .container { padding-left: 32px; padding-right: 32px; }
   /* Narrow screens only show part of the hero pattern: use its sparser left side */
   .pattern-hero { -webkit-mask-position: left top; mask-position: left top; }
-  .nav { gap: 14px; }
+  .logo { white-space: nowrap; }
+  .nav { gap: 12px; font-size: 12px; }
   .hero { padding-top: 24px; padding-bottom: 64px; }
   .pub { grid-template-columns: 1fr; gap: 16px; }
-  .projects-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

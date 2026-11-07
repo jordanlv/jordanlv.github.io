@@ -25,17 +25,6 @@ const lastName = rest.join(' ');
     <span class="hero-name">{firstName} <span class="muted">{lastName}</span></span>
   </h1>
   <p class="role">{profile.role[lang]}</p>
-
-  {profile.award && (
-    <div class="hero-award">
-      <a href={profile.award.url} class="hero-award-link">
-        <span class="award-icon"><Icon name="trophy" size={14} /></span>
-        <span class="award-text"><strong>{profile.award.label}</strong> · {profile.award.venue}</span>
-        <Icon name="arrow" size={12} />
-      </a>
-    </div>
-  )}
-
   <p class="bio">{profile.bio[lang]}</p>
 
   {profile.status && (
@@ -46,12 +35,6 @@ const lastName = rest.join(' ');
   )}
 
   <ul class="links">
-    <li>
-      <a href={profile.cv} target="_blank" rel="noopener" class="hero-cv-btn">
-        <Icon name="file" size={15} />
-        <span>Download Resume</span>
-      </a>
-    </li>
     {
       profile.links.map((link) => (
         <li>

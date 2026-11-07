@@ -3,13 +3,8 @@
   "initials": "JL",
   "photo": "/photo.webp",
   "role": {
-    "en": "Applied Scientist & PhD Candidate · Time-Series & Foundation Models",
-    "fr": "Applied Scientist & Doctorant · Time-Series & Modèles de Fondation"
-  },
-  "award": {
-    "label": "Best Paper Award",
-    "venue": "IDA 2026",
-    "url": "/papers/shap-anomaly-detectors-complementarity/"
+    "en": "Applied Scientist at TwinswHeel - PhD Candidate at IRIT",
+    "fr": "Applied Scientist chez TwinswHeel - Doctorant à l'IRIT"
   },
   "status": {
     "en": "Graduating in early 2027 — actively seeking Applied Scientist / Research Engineer roles.",
@@ -17,8 +12,8 @@
   },
   "location": "Toulouse, France",
   "bio": {
-    "en": "I work on time-series foundation models (TSPulse), edge AI, and explainability for autonomous systems at IRIT (Université Toulouse Capitole) and TwinswHeel. My research focuses on adapting and distilling deep foundation models into lightweight, adaptive architectures for low-latency onboard anomaly detection.",
-    "fr": "Je travaille sur les modèles de fondation temporels (TSPulse), l'Edge AI et l'explicabilité pour les systèmes autonomes à l'IRIT (Université Toulouse Capitole) et chez TwinswHeel. Mes recherches portent sur l'adaptation et la distillation de modèles de fondation en architectures légères et adaptatives pour la détection d'anomalies embarquée à basse latence."
+    "en": "I work on time-series, edge AI, and explainability for mobile robots at IRIT (Université Toulouse Capitole) and TwinswHeel. My research focuses on adapting and distilling deep foundation models into lightweight, adaptive architectures for low-latency onboard anomaly detection.",
+    "fr": "Je travaille sur les séries temporelles, l'Edge AI et l'explicabilité pour les robots mobiles à l'IRIT (Université Toulouse Capitole) et chez TwinswHeel. Mes recherches portent sur l'adaptation et la distillation de modèles de fondation profonds en architectures légères et adaptatives pour la détection d'anomalies embarquée à basse latence."
   },
   "email": "jordan.levy@irit.fr",
   "cv": "/cv.pdf",
@@ -31,7 +26,7 @@
   "research": [
     {
       "title": "Foundation Models & Edge AI",
-      "description": "Distilling and adapting deep time-series foundation models (TSPulse) for real-time edge anomaly detection."
+      "description": "Distilling and adapting deep time-series foundation models for real-time edge anomaly detection."
     },
     {
       "title": "Explainability (XAI)",

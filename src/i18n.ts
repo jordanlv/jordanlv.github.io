@@ -11,10 +11,10 @@ export const homePath: Record<Lang, string> = { en: '/', fr: '/fr/' };
 
 export const ui = {
   en: {
-    projects: 'Projects',
+    projects: 'Personal projects',
+    projectsNav: 'Projects',
     publications: 'Publications',
     resume: 'Resume',
-    downloadResume: 'Download Resume',
     filterByDate: 'Filter by date',
     date: 'Date',
     allDates: 'All dates',
@@ -37,10 +37,10 @@ export const ui = {
     comingSoon: 'A full presentation of this paper is coming soon.',
   },
   fr: {
-    projects: 'Projets',
+    projects: 'Projets personnels',
+    projectsNav: 'Projets',
     publications: 'Publications',
     resume: 'CV',
-    downloadResume: 'Télécharger le CV',
     filterByDate: 'Filtrer par date',
     date: 'Date',
     allDates: 'Toutes les dates',

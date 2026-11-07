@@ -13,71 +13,55 @@ const t = ui[lang];
 
 <section class="section container" id="projects">
   <div class="section-head">
-    <h2 class="section-title">
-      {t.projects} <span class="tag count">{projects.length}</span>
-    </h2>
+    <h2 class="section-title">{t.projects}</h2>
   </div>
 
   <div class="projects-grid">
     {
-      projects.map((project) => {
-        const isFeatured = project.id === 'kubesleeper';
-        return (
-          <article class:list={['project-card', { 'is-featured': isFeatured }]}>
-            <div class="project-header">
-              <div class="project-title-row">
-                <h3 class="project-title">
-                  {project.github ? (
-                    <a href={project.github} target="_blank" rel="noopener">
-                      {project.title}
-                      <Icon name="arrow" size={14} />
-                    </a>
-                  ) : project.paper ? (
-                    <a href={project.paper}>
-                      {project.title}
-                      <Icon name="arrow" size={14} />
-                    </a>
-                  ) : (
-                    project.title
-                  )}
-                </h3>
-                {project.badge && <span class:list={['project-badge', { 'award-badge-inline': project.badge.includes('Award') }]}>{project.badge}</span>}
-              </div>
+      projects.map((project) => (
+        <article class="project-card">
+          <div class="project-header">
+            <div class="project-title-row">
+              <h3 class="project-title">
+                {project.github ? (
+                  <a href={project.github} target="_blank" rel="noopener">
+                    {project.title}
+                    <Icon name="arrow" size={14} />
+                  </a>
+                ) : (
+                  project.title
+                )}
+              </h3>
+              {project.badge && <span class="project-badge">{project.badge}</span>}
             </div>
+          </div>
 
-            <p class="project-desc">{project.description[lang]}</p>
+          <p class="project-desc">{project.description[lang]}</p>
 
-            <div class="project-footer">
-              <ul class="project-tags">
-                {project.tags.map((tag) => (
-                  <li class="tag">{tag}</li>
-                ))}
-              </ul>
+          <div class="project-footer">
+            <ul class="project-tags">
+              {project.tags.map((tag) => (
+                <li class="tag">{tag}</li>
+              ))}
+            </ul>
 
-              <div class="project-links">
-                {project.github && (
-                  <a href={project.github} target="_blank" rel="noopener" class="project-link" aria-label={`${project.title} repository`}>
-                    <Icon name="github" size={14} />
-                    <span>Code</span>
-                  </a>
-                )}
-                {project.website && (
-                  <a href={project.website} target="_blank" rel="noopener" class="project-link" aria-label={`${project.title} website`}>
-                    <Icon name="arrow" size={13} />
-                    <span>Website</span>
-                  </a>
-                )}
-                {project.paper && (
-                  <a href={project.paper} class="project-link" aria-label={`${project.title} paper`}>
-                    <Icon name="file" size={13} />
-                    <span>Paper</span>
-                  </a>
-                )}
-              </div>
+            <div class="project-links">
+              {project.github && (
+                <a href={project.github} target="_blank" rel="noopener" class="project-link" aria-label={`${project.title} repository`}>
+                  <Icon name="github" size={14} />
+                  <span>GitHub</span>
+                </a>
+              )}
+              {project.website && (
+                <a href={project.website} target="_blank" rel="noopener" class="project-link" aria-label={`${project.title} website`}>
+                  <Icon name="arrow" size={13} />
+                  <span>Website</span>
+                </a>
+              )}
             </div>
-          </article>
-        );
-      })
+          </div>
+        </article>
+      ))
     }
   </div>
 </section>

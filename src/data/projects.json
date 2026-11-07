@@ -2,65 +2,13 @@
   {
     "id": "kubesleeper",
     "title": "Kubesleeper",
-    "badge": "Rust · Systems",
-    "featured": true,
+    "badge": "Rust · Kubernetes",
     "description": {
-      "en": "A scale-to-zero Kubernetes controller built from scratch in Rust to optimize cloud resource usage and cut infrastructure costs. It automatically sleeps inactive workloads and wakes them upon incoming requests without proxy overhead.",
-      "fr": "Un contrôleur Kubernetes scale-to-zero développé from scratch en Rust pour optimiser l'utilisation des ressources et réduire les coûts d'infrastructure. Il endort les charges inactives et les réveille au premier trafic entrant."
+      "en": "A scale-to-zero Kubernetes controller built from scratch in Rust to optimize resource usage and infrastructure costs. It automatically sleeps inactive workloads and wakes them upon incoming traffic without proxy overhead.",
+      "fr": "Un contrôleur Kubernetes scale-to-zero développé from scratch en Rust pour optimiser l'utilisation des ressources et les coûts d'infrastructure. Il endort automatiquement les charges inactives et les réveille au premier trafic entrant."
     },
     "tags": ["Rust", "Kubernetes", "Controller", "Cloud Native"],
     "github": "https://github.com/kubesleeper/kubesleeper",
     "website": "https://kubesleeper.com"
-  },
-  {
-    "id": "teacher-student-online",
-    "title": "Edge Foundation Model Distillation",
-    "badge": "Edge AI · Deep Learning",
-    "featured": true,
-    "description": {
-      "en": "Adaptive edge anomaly detection architecture for mobile robot fleets. Investigates foundation model adaptation by distilling deep time-series models (TSPulse) into lightweight student models for ultra-low-latency onboard inference.",
-      "fr": "Architecture adaptative de détection d'anomalies sur l'edge pour robots mobiles. Adaptation de modèles de fondation temporels (TSPulse) par distillation vers des modèles légers assurant une inférence embarquée à très basse latence."
-    },
-    "tags": ["PyTorch", "Python", "Foundation Models", "Edge AI", "Distillation"],
-    "github": "https://github.com/jordanlv/teacher-student-online",
-    "paper": "/papers/continuous-online-fault-detection/"
-  },
-  {
-    "id": "shap-uad",
-    "title": "SHAP Explainability in Anomaly Detection",
-    "badge": "🏆 Best Paper Award",
-    "featured": true,
-    "description": {
-      "en": "Official implementation of the IDA 2026 Best Paper Award. Uses Shapley Additive Explanations (SHAP) to understand anomaly detection algorithm behaviors, feature contributions, and detector complementarity across complex sensor streams.",
-      "fr": "Implémentation officielle du Best Paper Award à IDA 2026. Exploite les explications SHAP pour comprendre les comportements des détecteurs d'anomalies et analyser leur complémentarité sur des flux de capteurs multivariés."
-    },
-    "tags": ["Python", "SHAP", "XAI", "Anomaly Detection", "Best Paper"],
-    "github": "https://github.com/jordanlv/SHAP-based-Complementarity-in-UAD",
-    "paper": "/papers/shap-anomaly-detectors-complementarity/"
-  },
-  {
-    "id": "timeciel",
-    "title": "TimeCIEL: Multi-Agent Ensemble Learning",
-    "badge": "PAAMS 2025",
-    "featured": false,
-    "description": {
-      "en": "Contextual and interactive ensemble learning method for multivariate time series classification, published at PAAMS 2025. Combines cooperative multi-agent systems with deep representation learning for robust decision making.",
-      "fr": "Méthode d'apprentissage ensembliste interactive et contextuelle pour la classification de séries temporelles multivariées, publiée à PAAMS 2025."
-    },
-    "tags": ["Python", "Time Series", "Multi-Agent", "Ensemble Learning"],
-    "github": "https://github.com/jordanlv/TimeCIEL",
-    "paper": "/papers/timeciel/"
-  },
-  {
-    "id": "robot-fault-dataset",
-    "title": "Service Robot Fault Dataset & Benchmark",
-    "badge": "Dataset & Benchmark",
-    "featured": false,
-    "description": {
-      "en": "Curated dataset and benchmark suite of real multivariate hardware and sensor faults recorded on autonomous mobile service robots (TwinswHeel fleets) to train and evaluate fault detection methods in production.",
-      "fr": "Jeu de données et benchmark ouvert de pannes réelles enregistrées sur des flottes de robots de service autonomes (TwinswHeel) pour évaluer la détection d'anomalies en conditions réelles."
-    },
-    "tags": ["Dataset", "Robotics", "Time Series", "Benchmarking"],
-    "paper": "/papers/jeu-de-donnees-fautes-robots-de-service/"
   }
 ]
