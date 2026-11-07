@@ -1,5 +1,7 @@
 ---
-// Pill laid over a paper's image (list thumbnail and paper page figure)
+import Icon from './Icon.astro';
+
+// High-contrast award pill shown in a paper's metadata
 interface Props {
   label: string;
 }
@@ -7,4 +9,7 @@ interface Props {
 const { label } = Astro.props;
 ---
 
-<span class="award-badge">{label}</span>
+<span class="award-badge">
+  <Icon name="trophy" size={13} />
+  {label}
+</span>

@@ -1,7 +1,6 @@
 ---
 import Icon from './Icon.astro';
 import Dropdown from './Dropdown.astro';
-import AwardBadge from './AwardBadge.astro';
 import PaperMeta from './PaperMeta.astro';
 import PaperAuthors from './PaperAuthors.astro';
 import { languageNames, languages, ui, type Lang } from '../i18n';
@@ -52,14 +51,13 @@ const paperLangs = languages.filter((l) => papers.some((paper) => paper.data.lan
   <ol class="pubs">
     {
       papers.map((paper) => {
-        const { title, authors, venue, year, type, image, format, award } = paper.data;
+        const { title, authors, venue, year, type, image, format } = paper.data;
         const href = paperPath(lang, paper.id);
         return (
           <li class="pub" data-year={year} data-format={format} data-lang={paper.data.lang}>
             {/* Decorative duplicate of the title link: hidden from assistive tech and tab order */}
             <a class="pub-thumb" href={href} tabindex="-1" aria-hidden="true">
               {image ? <img src={image} alt="" loading="lazy" /> : <span class="thumb-label">{venue || t.types[type]}</span>}
-              {award && <AwardBadge label={award[lang]} />}
             </a>
 
             <div class="pub-body">

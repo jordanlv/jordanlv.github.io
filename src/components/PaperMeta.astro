@@ -1,4 +1,5 @@
 ---
+import AwardBadge from './AwardBadge.astro';
 import { ui, type Lang } from '../i18n';
 import type { Paper } from '../lib/papers';
 
@@ -8,7 +9,7 @@ interface Props {
 }
 
 const { paper, lang } = Astro.props;
-const { year, venue, type } = paper.data;
+const { year, venue, type, award } = paper.data;
 const t = ui[lang];
 ---
 
@@ -19,4 +20,5 @@ const t = ui[lang];
   <span class="tag">{t.types[type]}</span>
   {/* Flag papers written in the other language */}
   {paper.data.lang !== lang && <span class="tag">{paper.data.lang.toUpperCase()}</span>}
+  {award && <AwardBadge label={award[lang]} />}
 </p>

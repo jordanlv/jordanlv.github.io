@@ -520,7 +520,6 @@ h1 {
 .pubs-more:has(> [hidden]) { display: none; }
 
 .pub-thumb {
-  position: relative; /* anchors the award badge */
   text-decoration: none;
   transition: border-color 0.2s;
   aspect-ratio: 16 / 9; /* same ratio as the paper page figure: one 1440×810 image per paper */
@@ -609,12 +608,13 @@ h1 {
   }
 }
 
-/* ---------- Award badge (over a paper's image) ---------- */
+/* ---------- Award badge ---------- */
 .award-badge {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  padding: 5px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 9px;
   border-radius: 999px;
   background: var(--accent);
   color: var(--accent-text);
@@ -623,10 +623,10 @@ h1 {
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;
-  box-shadow: 0 2px 8px var(--shadow);
 }
-/* Uneven vertical padding: Red Hat Display sits a little low in its line box (measured) */
-.paper-figure .award-badge { top: 16px; left: 16px; padding: 6.5px 14px 7.5px; font-size: 13px; }
+.award-badge svg {
+  flex-shrink: 0;
+}
 
 /* ---------- Buttons ---------- */
 .button {
@@ -679,7 +679,6 @@ h1 {
 .paper-actions .pill-button span[hidden] { display: none; }
 
 .paper-figure {
-  position: relative; /* anchors the award badge */
   margin: 40px 0 0;
   aspect-ratio: 16 / 9;
   border-radius: var(--radius);
