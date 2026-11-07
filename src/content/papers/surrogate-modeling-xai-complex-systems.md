@@ -11,7 +11,7 @@ authors:
   - "B. Gaudou"
   - "K. Shimoyama"
   - "J. Morlier"
-venue: "arXiv preprint"
+venue: "arXiv"
 year: 2025
 date: 2025-10-19
 type: Preprint

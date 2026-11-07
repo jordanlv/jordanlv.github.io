@@ -6,7 +6,7 @@ authors:
   - "M. Garouani"
   - "N. Verstaevel"
   - "B. Gaudou"
-venue: "Intelligent Data Analysis (IDA)"
+venue: "IDA"
 venueFull: "International Symposium on Intelligent Data Analysis (IDA 2026), pp. 126–140"
 year: 2026
 date: 2026-04-18

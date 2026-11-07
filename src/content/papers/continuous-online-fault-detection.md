@@ -5,7 +5,7 @@ authors:
   - "N. Verstaevel"
   - "V. Talon"
   - "B. Gaudou"
-venue: "arXiv preprint"
+venue: "arXiv"
 year: 2026
 date: 2026-09-24
 type: Preprint
