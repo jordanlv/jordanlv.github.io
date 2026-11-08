@@ -2,8 +2,8 @@
   "work": [
     {
       "role": {
-        "en": "Applied Scientist & PhD Candidate (CIFRE)",
-        "fr": "Applied Scientist & Doctorant (CIFRE)"
+        "en": "Applied Scientist — Robotics & Anomaly Detection",
+        "fr": "Applied Scientist — Robotique & Détection d'anomalies"
       },
       "organization": {
         "en": "TwinswHeel · IRIT (Université Toulouse Capitole)",
@@ -67,8 +67,8 @@
   "education": [
     {
       "degree": {
-        "en": "PhD in Computer Science (Artificial Intelligence)",
-        "fr": "Doctorat en Informatique (Intelligence Artificielle)"
+        "en": "PhD in Computer Science",
+        "fr": "Doctorat en Informatique"
       },
       "institution": {
         "en": "Université Toulouse Capitole · IRIT",
@@ -87,8 +87,8 @@
     },
     {
       "degree": {
-        "en": "Engineering Degree in Artificial Intelligence",
-        "fr": "Diplôme d'Ingénieur en Intelligence Artificielle"
+        "en": "Engineering Degree in Computer Science",
+        "fr": "Diplôme d'Ingénieur en Informatique"
       },
       "institution": {
         "en": "Polytech Nantes",

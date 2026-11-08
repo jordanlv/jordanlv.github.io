@@ -23,8 +23,8 @@ const lastName = rest.join(' ');
     <a href={isHome ? '#top' : home} class:list={['logo', { 'is-visible': !isHome }]}>{firstName} <span class="muted">{lastName}</span></a>
     <nav class="nav">
       <div class="nav-links">
-        <a href={`${home}#publications`}>{t.publications}</a>
         <a href={`${home}#experience`}>{t.experience}</a>
+        <a href={`${home}#publications`}>{t.publications}</a>
         <a href={`${home}#projects`}>{t.projectsNav}</a>
       </div>
       <div class="nav-menu-wrap" data-nav-menu>
@@ -33,8 +33,8 @@ const lastName = rest.join(' ');
           <span class="icon-menu-close"><Icon name="close" size={16} /></span>
         </button>
         <div class="dropdown-menu nav-dropdown" hidden>
-          <a href={`${home}#publications`}>{t.publications}</a>
           <a href={`${home}#experience`}>{t.experience}</a>
+          <a href={`${home}#publications`}>{t.publications}</a>
           <a href={`${home}#projects`}>{t.projectsNav}</a>
         </div>
       </div>
