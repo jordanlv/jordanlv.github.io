@@ -16,6 +16,7 @@ summary:
   en: "TimeCIEL, a contextual and interactive ensemble learning method for time series classification, built on a multi-agent approach."
   fr: "TimeCIEL, une méthode d’apprentissage ensembliste contextuelle et interactive pour la classification de séries temporelles, fondée sur une approche multi-agents."
 url: "https://hal.science/hal-05053054v1"
+github: "https://github.com/jordanlv/TimeCIEL"
 image: "/papers/timeciel.webp"
 keywords:
   - "XAI"

@@ -18,6 +18,7 @@ const papers = defineCollection({
     summary: z.object({ en: z.string(), fr: z.string() }),
     image: z.string().optional(), // figure used as thumbnail, path under public/
     url: z.string().url().optional(), // original source (arXiv, HAL, publisher…)
+    github: z.string().url().optional(), // open-source code repository
     keywords: z.array(z.string()).default([]),
     award: z.object({ en: z.string(), fr: z.string() }).optional(), // e.g. Best Paper Award, shown on the image
   }),

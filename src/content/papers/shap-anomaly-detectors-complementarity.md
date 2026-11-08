@@ -16,6 +16,7 @@ summary:
   en: "Uses SHAP contributions to compare how different anomaly detection algorithms make their decisions, and to identify which detectors complement each other."
   fr: "Utilise les contributions SHAP pour comparer la façon dont différents algorithmes de détection d’anomalies prennent leurs décisions, et identifier les détecteurs complémentaires."
 url: "https://arxiv.org/abs/2602.00208"
+github: "https://github.com/jordanlv/SHAP-based-Complementarity-in-UAD"
 image: "/papers/shap-anomaly-detectors-complementarity.webp"
 award:
   en: "Best Paper Award"

@@ -34,6 +34,7 @@ export const ui = {
     // Paper pages
     allPublications: 'All publications',
     readOn: 'Read on',
+    code: 'Code',
     copyBibtex: 'Copy BibTeX',
     copied: 'Copied',
     cite: 'Cite this paper',
@@ -64,6 +65,7 @@ export const ui = {
     // Paper pages
     allPublications: 'Toutes les publications',
     readOn: 'Lire sur',
+    code: 'Code',
     copyBibtex: 'Copier le BibTeX',
     copied: 'Copié',
     cite: 'Citer cet article',

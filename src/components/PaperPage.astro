@@ -17,7 +17,7 @@ interface Props {
 
 const { paper, lang } = Astro.props;
 const t = ui[lang];
-const { title, authors, venue, venueFull, type, summary, image, url, keywords } = paper.data;
+const { title, authors, venue, venueFull, type, summary, image, url, github, keywords } = paper.data;
 const { Content } = await render(paper);
 const hasContent = Boolean(paper.body?.trim());
 const bibtex = toBibtex(paper);
@@ -50,6 +50,12 @@ const bibtex = toBibtex(paper);
           <a class="button" href={url} target="_blank" rel="noopener">
             {t.readOn} {sourceName(url)}
             <Icon name="arrow" size={14} />
+          </a>
+        )}
+        {github && (
+          <a class="pill-button" href={github} target="_blank" rel="noopener">
+            <Icon name="github" size={15} />
+            {t.code}
           </a>
         )}
         <button type="button" class="pill-button" data-copy-bibtex>

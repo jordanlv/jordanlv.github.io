@@ -346,6 +346,7 @@ h1 {
   border: 1px solid var(--border);
   border-radius: 999px;
   cursor: pointer;
+  text-decoration: none;
   transition: border-color 0.2s;
 }
 .dropdown-trigger:hover,
